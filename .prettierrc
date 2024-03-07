@@ -1,0 +1,7 @@
+{
+    "format": "prettier --write \"src/**/*.{js, jsx}\"",
+    "tabWidth": 4,
+    "bracketSameLine": true,
+    "arrowParens": "avoid",
+    "trailingComma": "none"
+}
