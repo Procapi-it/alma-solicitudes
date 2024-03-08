@@ -11,7 +11,7 @@ export const Formulario = () => {
     const [judicial, setJudicial] = useState("si");
 
     const onSubmit = data => {
-        sendCustomEmail(data);
+        sendCustomEmail(data); 
     };
 
     return (
@@ -26,24 +26,24 @@ export const Formulario = () => {
 
                     <section>
                         <div className="mb-4">
-                            <label htmlFor="sucursal" className="block mb-2">
+                            <label htmlFor="sucursales" className="block mb-2">
                                 Sucursal<span className="text-red-500">*</span>:
                             </label>
                             <select
-                                id="sucursal"
-                                {...register("sucursal")}
+                                id="sucursales"
+                                {...register("sucursales", { required: true })}
                                 className="border border-gray-300 px-4 py-2 rounded-md w-full">
                                 <option value="">Seleccione:</option>
-                                <option value="brand1">Vista Hermosa</option>
-                                <option value="brand2">Costa del Este</option>
-                                <option value="brand3">Rio Abajo</option>
-                                <option value="brand4">Albrook</option>
-                                <option value="brand5">San Antonio</option>
-                                <option value="brand6">Colón</option>
-                                <option value="brand7">Milla 8</option>
-                                <option value="brand8">Gorgona</option>
-                                <option value="brand9">David</option>
-                                <option value="brand10">Hato Montaña</option>
+                                <option value="vista Hermosa">Vista Hermosa</option>
+                                <option value="Costa del Este">Costa del Este</option>
+                                <option value="Rio Abajo">Rio Abajo</option>
+                                <option value="Albrook">Albrook</option>
+                                <option value="San Antonio">San Antonio</option>
+                                <option value="Colon">Colón</option>
+                                <option value="Milla 8">Milla 8</option>
+                                <option value="Gorgona">Gorgona</option>
+                                <option value="David">David</option>
+                                <option value="Hato Montana">Hato Montaña</option>
                             </select>
                         </div>
 
@@ -54,7 +54,7 @@ export const Formulario = () => {
                             </label>
                             <select
                                 id="meses"
-                                {...register("meses")}
+                                {...register("meses", { required: true })}
                                 className="border border-gray-300 px-4 py-2 rounded-md w-full">
                                 <option value="">Seleccione:</option>
                                 <option value="1">1</option>
@@ -167,15 +167,15 @@ export const Formulario = () => {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
                                 <div>
                                     <label
-                                        htmlFor="name"
+                                        htmlFor="nombrenatural"
                                         className="block mb-2">
                                         Nombre
                                         <span className="text-red-500">*</span>:
                                     </label>
                                     <input
                                         type="text"
-                                        id="name"
-                                        {...register("name", {
+                                        id="nombrenatural"
+                                        {...register("nombrenatural", {
                                             required: true
                                         })}
                                         className="border border-gray-300 px-4 py-2 rounded-md w-full"
@@ -183,15 +183,15 @@ export const Formulario = () => {
                                 </div>
                                 <div>
                                     <label
-                                        htmlFor="lastname"
+                                        htmlFor="apellido"
                                         className="block mb-2">
                                         Apellidos
                                         <span className="text-red-500">*</span>:
                                     </label>
                                     <input
                                         type="text"
-                                        id="lastname"
-                                        {...register("lastmane", {
+                                        id="apellido"
+                                        {...register("apellido", {
                                             required: true
                                         })}
                                         className="border border-gray-300 px-4 py-2 rounded-md w-full"
@@ -460,15 +460,15 @@ export const Formulario = () => {
                                 </div>
                                 <div className="span-col-3">
                                     <label
-                                        htmlFor="direccionempresa"
+                                        htmlFor="telefonocontacto"
                                         className="block mb-2">
                                         Teléfono Oficina
                                         <span className="text-red-500">*</span>:
                                     </label>
                                     <input
                                         type="text"
-                                        id="direccionempresa"
-                                        {...register("direccionempresa", {
+                                        id="telefonocontacto"
+                                        {...register("telefonocontacto", {
                                             required: true
                                         })}
                                         className="border border-gray-300 px-4 py-2 rounded-md w-full"
@@ -476,15 +476,15 @@ export const Formulario = () => {
                                 </div>
                                 <div>
                                     <label
-                                        htmlFor="teléfonotrabajo"
+                                        htmlFor="telefonotrabajo"
                                         className="block mb-2">
                                         Teléfono Trabajo
                                         <span className="text-red-500">*</span>:
                                     </label>
                                     <input
                                         type="text"
-                                        id="teléfonotrabajo"
-                                        {...register("teléfonotrabajo", {
+                                        id="telefonotrabajo"
+                                        {...register("telefonotrabajo", {
                                             required: true
                                         })}
                                         className="border border-gray-300 px-4 py-2 rounded-md w-full"
@@ -492,15 +492,15 @@ export const Formulario = () => {
                                 </div>
                                 <div>
                                     <label
-                                        htmlFor="teléfonotrabajo2"
+                                        htmlFor="telefonotrabajo2"
                                         className="block mb-2">
                                         Teléfono Oficina 2
                                         <span className="text-red-500">*</span>:
                                     </label>
                                     <input
                                         type="text"
-                                        id="teléfonotrabajo2"
-                                        {...register("teléfonotrabajo2", {
+                                        id="telefonotrabajo2"
+                                        {...register("telefonotrabajo2", {
                                             required: true
                                         })}
                                         className="border border-gray-300 px-4 py-2 rounded-md w-full"
@@ -524,26 +524,26 @@ export const Formulario = () => {
                                 </div>
                                 <div className="col-span-2">
                                     <label
-                                        htmlFor="correo"
+                                        htmlFor="correojuridico"
                                         className="block mb-2">
                                         E-Mail
                                         <span className="text-red-500">*</span>:
                                     </label>
                                     <input
                                         type="email"
-                                        id="correo"
-                                        {...register("correo", {
+                                        id="correojuridico"
+                                        {...register("correojuridico", {
                                             required: true,
                                             pattern:
                                                 /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
                                         })}
                                         className={`border border-gray-300 px-4 py-2 rounded-md w-full ${
-                                            errors.correo
+                                            errors.correojuridico
                                                 ? "border-red-500"
                                                 : ""
                                         }`}
                                     />
-                                    {errors.correo && (
+                                    {errors.correojuridico && (
                                         <p className="text-red-500">
                                             Porfavor ingrese un correo válido
                                         </p>
@@ -551,26 +551,26 @@ export const Formulario = () => {
                                 </div>
                                 <div className="col-span-2">
                                     <label
-                                        htmlFor="confirmeemail"
+                                        htmlFor="confirmeemailjuridico"
                                         className="block mb-2">
                                         Confirme su E-Mail
                                         <span className="text-red-500">*</span>:
                                     </label>
                                     <input
                                         type="email"
-                                        id="confirmeemail"
-                                        {...register("confirmeemail", {
+                                        id="confirmeemailjuridico"
+                                        {...register("confirmeemailjuridico", {
                                             required: true,
                                             pattern:
                                                 /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
                                         })}
                                         className={`border border-gray-300 px-4 py-2 rounded-md w-full ${
-                                            errors.confirmeemail
+                                            errors.confirmeemailjuridico
                                                 ? "border-red-500"
                                                 : ""
                                         }`}
                                     />
-                                    {errors.confirmeemail && (
+                                    {errors.confirmeemailjuridico && (
                                         <p className="text-red-500">
                                             Porfavor ingrese un correo válido
                                         </p>
@@ -626,7 +626,7 @@ export const Formulario = () => {
                                     <input
                                         type="text"
                                         id="mobile1"
-                                        {...register("mobile1", )}
+                                        {...register("mobile1")}
                                         className="border border-gray-300 px-4 py-2 rounded-md w-full"
                                     />
                                 </div>
@@ -814,7 +814,7 @@ export const Formulario = () => {
                                 <div>
                                     <input
                                         type="checkbox"
-                                        id="checkbox1"
+                                        id="checkbox2"
                                         {...register("checkbox2")}
                                     />
                                     <label htmlFor="checkbox2" className="mx-1">
@@ -824,7 +824,7 @@ export const Formulario = () => {
                                 <div>
                                     <input
                                         type="checkbox"
-                                        id="checkbox1"
+                                        id="checkbox3"
                                         {...register("checkbox3")}
                                     />
                                     <label htmlFor="checkbox3" className="mx-1">
@@ -834,7 +834,7 @@ export const Formulario = () => {
                                 <div>
                                     <input
                                         type="checkbox"
-                                        id="checkbox1"
+                                        id="checkbox4"
                                         {...register("checkbox4")}
                                     />
                                     <label htmlFor="checkbox4" className="mx-1">
@@ -844,7 +844,7 @@ export const Formulario = () => {
                                 <div>
                                     <input
                                         type="checkbox"
-                                        id="checkbox1"
+                                        id="checkbox5"
                                         {...register("checkbox5")}
                                     />
                                     <label htmlFor="checkbox5" className="mx-1">
@@ -854,7 +854,7 @@ export const Formulario = () => {
                                 <div>
                                     <input
                                         type="checkbox"
-                                        id="checkbox1"
+                                        id="checkbox6"
                                         {...register("checkbox6")}
                                     />
                                     <label htmlFor="checkbox6" className="mx-1">
@@ -864,7 +864,7 @@ export const Formulario = () => {
                                 <div>
                                     <input
                                         type="checkbox"
-                                        id="checkbox1"
+                                        id="checkbox7"
                                         {...register("checkbox7")}
                                     />
                                     <label htmlFor="checkbox7" className="mx-1">
@@ -874,7 +874,7 @@ export const Formulario = () => {
                                 <div>
                                     <input
                                         type="checkbox"
-                                        id="checkbox1"
+                                        id="checkbox8"
                                         {...register("checkbox8")}
                                     />
                                     <label htmlFor="checkbox8" className="mx-1">
@@ -884,7 +884,7 @@ export const Formulario = () => {
                                 <div>
                                     <input
                                         type="checkbox"
-                                        id="checkbox1"
+                                        id="checkbox9"
                                         {...register("checkbox9")}
                                     />
                                     <label htmlFor="checkbox9" className="mx-1">
@@ -894,7 +894,7 @@ export const Formulario = () => {
                                 <div>
                                     <input
                                         type="checkbox"
-                                        id="checkbox1"
+                                        id="checkbox10"
                                         {...register("checkbox10")}
                                     />
                                     <label
@@ -906,7 +906,7 @@ export const Formulario = () => {
                                 <div>
                                     <input
                                         type="checkbox"
-                                        id="checkbox1"
+                                        id="checkbox11"
                                         {...register("checkbox11")}
                                     />
                                     <label
@@ -919,6 +919,38 @@ export const Formulario = () => {
                         </section>
                         <hr className="my-5" />
                         <section>
+                            <div>
+                                <label htmlFor="file" className="block mb-2">
+                                    Adjuntar Cédula o Pasaporte
+                                    <span className="text-red-500">*</span>:
+                                </label>
+                                <input
+                                    type="file"
+                                    id="file"
+                                    {...register("file")}
+                                    className="border border-gray-300 px-4 py-2 rounded-md w-full mb-2 "
+                                    required
+                                />
+                            </div>
+                            {persona === "juridica" ? (
+                                <div>
+                                    <label
+                                        htmlFor="file"
+                                        className="block mb-2">
+                                        Adjuntar aviso de operaciones
+                                        <span className="text-red-500">*</span>:
+                                    </label>
+                                    <input
+                                        type="file"
+                                        id="file"
+                                        {...register("file")}
+                                        className="border border-gray-300 px-4 py-2 rounded-md w-full mb-5"
+                                        required
+                                    />
+                                </div>
+                            ) : (
+                                <div></div>
+                            )}
                             <h2 className="text-bold">
                                 Forman parte de un proceso judicial los bienes
                                 que serán almacenajes?
@@ -930,7 +962,6 @@ export const Formulario = () => {
                                         id="judicialSi"
                                         name="judicial"
                                         value="si"
-                                        defaultChecked
                                         onChange={() => setJudicial("si")}
                                     />
                                     <label
@@ -945,6 +976,7 @@ export const Formulario = () => {
                                         id="judicialNo"
                                         name="judicial"
                                         value="no"
+                                        defaultChecked
                                         onChange={() => setJudicial("no")}
                                     />
                                     <label
@@ -954,19 +986,7 @@ export const Formulario = () => {
                                     </label>
                                 </div>
                             </div>
-                            <div>
-                                <label htmlFor="file" className="block mb-2">
-                                    Adjuntar Cédula o Pasaporte
-                                    <span className="text-red-500">*</span>:
-                                </label>
-                                <input
-                                    type="file"
-                                    id="file"
-                                    {...register("file")}
-                                    className="border border-gray-300 px-4 py-2 rounded-md w-full"
-                                    required
-                                />
-                            </div>
+
                             {judicial === "si" ? (
                                 <>
                                     <div>
@@ -1027,25 +1047,7 @@ export const Formulario = () => {
                             ) : (
                                 <div></div>
                             )}
-                            {persona === "juridica" ? (
-                                <div>
-                                    <label
-                                        htmlFor="file"
-                                        className="block mb-2">
-                                        Adjuntar aviso de operaciones
-                                        <span className="text-red-500">*</span>:
-                                    </label>
-                                    <input
-                                        type="file"
-                                        id="file"
-                                        {...register("file")}
-                                        className="border border-gray-300 px-4 py-2 rounded-md w-full"
-                                        required
-                                    />
-                                </div>
-                            ) : (
-                                <div></div>
-                            )}
+                            
                         </section>
                     </section>
                     <section>
