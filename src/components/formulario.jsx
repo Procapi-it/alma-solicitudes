@@ -1,6 +1,12 @@
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { sendCustomEmail } from "../global/email";
+import { BotonUpload } from "./botonupload";
+import { uploadAndConvertFile } from "../global/config";
+import { Completed } from "./completed";
+
+
 export const Formulario = () => {
     const {
         register,
@@ -8,14 +14,47 @@ export const Formulario = () => {
         formState: { errors }
     } = useForm();
     const [persona, setPersona] = useState("natural");
-    const [judicial, setJudicial] = useState("si");
+    const [judicial, setJudicial] = useState("no");
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const handleFileChange1 = async event => {
+        const file = event.target.files[0];
+        const text = await uploadAndConvertFile(file);
+        register("file1", { value: text });
+    };
+
+    const handleFileChange2 = async event => {
+        const file = event.target.files[0];
+        const text = await uploadAndConvertFile(file);
+        register("file2", { value: text });
+    };
+
+    const handleSelectChange = event => {
+        const selectedSucursal = event.target.value;
+        const sucursalEmails = {
+            "Vista Hermosa": ["vistahermosa@almacenajes.net", "ventas.vistahermosa@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "Costa del Este": ["costadeleste@almacenajes.net", "ventas.costadeleste@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "Rio Abajo": ["rioabajo@almacenajes.net, ventas.rioabajo@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "Albrook": ["albrook@almacenajes.net", "ventas.albrook@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "San Antonio": ["sanantonio@almacenajes.net", "ventas.sanantonio@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "Colon": ["colon@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "Milla 8": ["milla8@almacenajes.net", "ventas.milla8@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "Gorgona": ["gorgona@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "David": ["david@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "Hato Montana": ["hatomonatana@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"]
+        };
+        const emails = sucursalEmails[selectedSucursal] || [];
+        const emailsText = emails.join(", ");
+        register("emails", { value: emailsText });
+    };
 
     const onSubmit = data => {
-        sendCustomEmail(data); 
+        sendCustomEmail(data);
+        setIsSubmitted(true);
     };
 
     return (
         <>
+        {isSubmitted === true ? <Completed /> :
             <section className="px-36">
                 <form
                     onSubmit={handleSubmit(onSubmit)}
@@ -31,11 +70,19 @@ export const Formulario = () => {
                             </label>
                             <select
                                 id="sucursales"
-                                {...register("sucursales", { required: true })}
+                                {...register(
+                                    "sucursales",
+                                    { required: true }
+                                )}
+                                onChange={handleSelectChange}
                                 className="border border-gray-300 px-4 py-2 rounded-md w-full">
                                 <option value="">Seleccione:</option>
-                                <option value="vista Hermosa">Vista Hermosa</option>
-                                <option value="Costa del Este">Costa del Este</option>
+                                <option value="Vista Hermosa">
+                                    Vista Hermosa
+                                </option>
+                                <option value="Costa del Este">
+                                    Costa del Este
+                                </option>
                                 <option value="Rio Abajo">Rio Abajo</option>
                                 <option value="Albrook">Albrook</option>
                                 <option value="San Antonio">San Antonio</option>
@@ -43,7 +90,9 @@ export const Formulario = () => {
                                 <option value="Milla 8">Milla 8</option>
                                 <option value="Gorgona">Gorgona</option>
                                 <option value="David">David</option>
-                                <option value="Hato Montana">Hato Montaña</option>
+                                <option value="Hato Montana">
+                                    Hato Montaña
+                                </option>
                             </select>
                         </div>
 
@@ -612,7 +661,9 @@ export const Formulario = () => {
                                     <input
                                         type="text"
                                         id="telefono1"
-                                        {...register("telefono1")}
+                                        {...register("telefono1", {
+                                            required: true
+                                        })}
                                         className="border border-gray-300 px-4 py-2 rounded-md w-full"
                                     />
                                 </div>
@@ -626,7 +677,9 @@ export const Formulario = () => {
                                     <input
                                         type="text"
                                         id="mobile1"
-                                        {...register("mobile1")}
+                                        {...register("mobile1", {
+                                            required: true
+                                        })}
                                         className="border border-gray-300 px-4 py-2 rounded-md w-full"
                                     />
                                 </div>
@@ -640,10 +693,16 @@ export const Formulario = () => {
                                     <input
                                         type="email"
                                         id="email1"
-                                        {...register("email1", {
-                                            pattern:
-                                                /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-                                        })}
+                                        {...register(
+                                            "email1",
+                                            {
+                                                pattern:
+                                                    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+                                            },
+                                            {
+                                                required: true
+                                            }
+                                        )}
                                         className={`border border-gray-300 px-4 py-2 rounded-md w-full ${
                                             errors.email1
                                                 ? "border-red-500"
@@ -660,8 +719,7 @@ export const Formulario = () => {
                                     <label
                                         htmlFor="nombre2"
                                         className="block mb-2">
-                                        Nombre
-                                        <span className="text-red-500">*</span>:
+                                        Nombre:
                                     </label>
                                     <input
                                         type="text"
@@ -674,8 +732,7 @@ export const Formulario = () => {
                                     <label
                                         htmlFor="telefono2"
                                         className="block mb-2">
-                                        Teléfono
-                                        <span className="text-red-500">*</span>:
+                                        Teléfono:
                                     </label>
                                     <input
                                         type="text"
@@ -688,8 +745,7 @@ export const Formulario = () => {
                                     <label
                                         htmlFor="mobile2"
                                         className="block mb-2">
-                                        Mobile
-                                        <span className="text-red-500">*</span>:
+                                        Mobile:
                                     </label>
                                     <input
                                         type="text"
@@ -702,8 +758,7 @@ export const Formulario = () => {
                                     <label
                                         htmlFor="email2"
                                         className="block mb-2">
-                                        E-mail
-                                        <span className="text-red-500">*</span>:
+                                        E-mail:
                                     </label>
                                     <input
                                         type="email"
@@ -728,8 +783,7 @@ export const Formulario = () => {
                                     <label
                                         htmlFor="nombre3"
                                         className="block mb-2">
-                                        Nombre
-                                        <span className="text-red-500">*</span>:
+                                        Nombre:
                                     </label>
                                     <input
                                         type="text"
@@ -742,8 +796,7 @@ export const Formulario = () => {
                                     <label
                                         htmlFor="telefono3"
                                         className="block mb-2">
-                                        Teléfono
-                                        <span className="text-red-500">*</span>:
+                                        Teléfono:
                                     </label>
                                     <input
                                         type="text"
@@ -756,8 +809,7 @@ export const Formulario = () => {
                                     <label
                                         htmlFor="mobile3"
                                         className="block mb-2">
-                                        Mobile
-                                        <span className="text-red-500">*</span>:
+                                        Mobile:
                                     </label>
                                     <input
                                         type="text"
@@ -770,8 +822,7 @@ export const Formulario = () => {
                                     <label
                                         htmlFor="email3"
                                         className="block mb-2">
-                                        E-mail
-                                        <span className="text-red-500">*</span>:
+                                        E-mail:
                                     </label>
                                     <input
                                         type="email"
@@ -924,12 +975,8 @@ export const Formulario = () => {
                                     Adjuntar Cédula o Pasaporte
                                     <span className="text-red-500">*</span>:
                                 </label>
-                                <input
-                                    type="file"
-                                    id="file"
-                                    {...register("file")}
-                                    className="border border-gray-300 px-4 py-2 rounded-md w-full mb-2 "
-                                    required
+                                <BotonUpload
+                                    handleFileChange={handleFileChange1}
                                 />
                             </div>
                             {persona === "juridica" ? (
@@ -940,12 +987,8 @@ export const Formulario = () => {
                                         Adjuntar aviso de operaciones
                                         <span className="text-red-500">*</span>:
                                     </label>
-                                    <input
-                                        type="file"
-                                        id="file"
-                                        {...register("file")}
-                                        className="border border-gray-300 px-4 py-2 rounded-md w-full mb-5"
-                                        required
+                                    <BotonUpload
+                                        handleFileChange={handleFileChange2}
                                     />
                                 </div>
                             ) : (
@@ -1047,7 +1090,6 @@ export const Formulario = () => {
                             ) : (
                                 <div></div>
                             )}
-                            
                         </section>
                     </section>
                     <section>
@@ -1061,6 +1103,7 @@ export const Formulario = () => {
                     </section>
                 </form>
             </section>
+            }
         </>
     );
 };
