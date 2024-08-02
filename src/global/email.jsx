@@ -1,6 +1,6 @@
 import emailjs from "@emailjs/browser";
 
-export const sendCustomEmail = data  => {
+export const sendCustomEmail = (data, judicial)  => {
     emailjs.init(import.meta.env.VITE_EMAIL_USER_ID);
     emailjs
         .send(
@@ -47,24 +47,28 @@ export const sendCustomEmail = data  => {
                 telefono3: data.telefono3,
                 mobile3: data.mobile3,
                 email3: data.email3,
-                checkbox1: data.checkbox1 ? "SI" : "NO",
-                checkbox2: data.checkbox2 ? "SI" : "NO",
-                checkbox3: data.checkbox3 ? "SI" : "NO",
-                checkbox4: data.checkbox4 ? "SI" : "NO",
-                checkbox5: data.checkbox5 ? "SI" : "NO",
-                checkbox6: data.checkbox6 ? "SI" : "NO",
-                checkbox7: data.checkbox7 ? "SI" : "NO",
-                checkbox8: data.checkbox8 ? "SI" : "NO",
-                checkbox9: data.checkbox9 ? "SI" : "NO",
-                checkbox10: data.checkbox10 ? "SI" : "NO",
-                checkbox11: data.checkbox11 ? "SI" : "NO",
+                checkbox: [
+                    data.checkbox1 && "Herramientas",
+                    data.checkbox2 && "Desalojo",
+                    data.checkbox3 && "Materiales",
+                    data.checkbox4 && "Carros",
+                    data.checkbox5 && "Documentos / Archivos",
+                    data.checkbox6 && "Mobiliario y Equipos",
+                    data.checkbox7 && "Artículos de Hogar",
+                    data.checkbox8 && "Repuestos",
+                    data.checkbox9 && "Mercancía",
+                    data.checkbox10 && "Muebles del Hogar",
+                    data.checkbox11 && "Otros",
+                ].filter(Boolean).join(", "),
                 nombredemandante: data.nombredemandante,
                 direcciondemandante: data.direcciondemandante,
                 telefonodemandante: data.telefonodemandante,
                 file1: data.file1,
                 file2: data.file2,
                 emails: data.emails,
-            }
+                proceso: judicial,
+            } 
+            
         )
         .then(response => {
             console.log("SUCCESS!", response.status, response.text);
@@ -72,4 +76,5 @@ export const sendCustomEmail = data  => {
         .catch(err => {
             console.log("FAILED...", err);
         });
+        console.log(data);
 };
