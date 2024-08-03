@@ -76,5 +76,4 @@ export const sendCustomEmail = (data, judicial)  => {
         .catch(err => {
             console.log("FAILED...", err);
         });
-        console.log(data);
 };
