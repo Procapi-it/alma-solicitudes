@@ -65,7 +65,7 @@ export const Formulario = () => {
                 <section className="flex flex-col items-center justify-center">
                     <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="border mt-5">
+                        className="border mt-5 mx-auto">
                         <h2 className="text-md font-bold mb-4 text-start mt-5">
                             Los campos con (*) son obligatorios
                         </h2>
@@ -103,7 +103,7 @@ export const Formulario = () => {
                                 </select>
                             </div>
 
-                            <div className="mb-4">
+                            <div className="mb-4 mx-auto">
                                 <label htmlFor="meses" className="block mb-2">
                                     Cuánto tiempo planea utilizar el local?
                                     <span className="text-red-500">*</span>:
