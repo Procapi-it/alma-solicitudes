@@ -14,7 +14,7 @@ export const Formulario = () => {
         formState: { errors }
     } = useForm();
     const [persona, setPersona] = useState("natural");
-    const [judicial, setJudicial] = useState("NO");
+    const [judicial, setJudicial] = useState("no");
     const [isSubmitted, setIsSubmitted] = useState(false);
     const handleFileChange1 = async event => {
         const file = event.target.files[0];
@@ -62,10 +62,10 @@ export const Formulario = () => {
     return (
         <>
             {isSubmitted === true ? <Completed /> :
-                <section className="px-36">
+                <section className="md:pr-2 flex flex-col items-center justify-center">
                     <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="w-100 mx-auto px-2 border mt-5">
+                        className="px-2 border mt-5">
                         <h2 className="text-md font-bold mb-4 text-start mt-5">
                             Los campos con (*) son obligatorios
                         </h2>
@@ -220,7 +220,7 @@ export const Formulario = () => {
                                 </div>
                             </div>
                             {persona === "natural" ? (
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+                                <div className="md:col-span-3 lg:grid lg:grid-cols-3 gap-2 mt-2">
                                     <div>
                                         <label
                                             htmlFor="nombrenatural"
@@ -403,7 +403,7 @@ export const Formulario = () => {
                                     </div>
                                 </div>
                             ) : (
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+                                <div className="md:col-span-3 lg:grid lg:grid-cols-3 gap-2 mt-2">
                                     <div>
                                         <label
                                             htmlFor="compania"
@@ -1042,7 +1042,7 @@ export const Formulario = () => {
                                     </div>
                                 </div>
 
-                                {judicial === "SI" ? (
+                                {judicial === "si" ? (
                                     <>
                                         <div>
                                             <label
