@@ -62,10 +62,10 @@ export const Formulario = () => {
     return (
         <>
             {isSubmitted === true ? <Completed /> :
-                <section className="md:pr-2 flex flex-col items-center justify-center">
+                <section className="flex flex-col items-center justify-center">
                     <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="px-2 border mt-5">
+                        className="border mt-5">
                         <h2 className="text-md font-bold mb-4 text-start mt-5">
                             Los campos con (*) son obligatorios
                         </h2>
