@@ -65,7 +65,7 @@ export const Formulario = () => {
                 <section className="flex flex-col items-center justify-center">
                     <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="border mt-5 mx-auto">
+                        className="border mt-5 mx-auto ">
                         <h2 className="text-md font-bold mb-4 text-start mt-5">
                             Los campos con (*) son obligatorios
                         </h2>
@@ -1010,7 +1010,7 @@ export const Formulario = () => {
                                     Forman parte de un proceso judicial los bienes
                                     que serán almacenajes?
                                 </h2>
-                                <div className="flex gap-5">
+                                <div className="flex gap-5 m-2">
                                     <div>
                                         <input
                                             type="radio"
@@ -1108,7 +1108,7 @@ export const Formulario = () => {
                             <div className="flex justify-center">
                                 <button
                                     type="submit"
-                                    className=" bg-orange-600 text-white text-2xl px-4 py-2 rounded-md my-5 w-96">
+                                    className=" bg-orange-600 text-white text-2xl px-2 py-2 rounded-md my-5 w-64 lg:96">
                                     Enviar
                                 </button>
                             </div>
