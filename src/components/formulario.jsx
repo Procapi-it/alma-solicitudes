@@ -983,7 +983,7 @@ export const Formulario = () => {
                             <hr className="my-5" />
                             <section>
                                 <div>
-                                    <label htmlFor="file" className="block mb-2">
+                                    <label htmlFor="file" className="block mb-2" required>
                                         Adjuntar Cédula o Pasaporte
                                         <span className="text-red-500">*</span>:
                                     </label>
@@ -995,6 +995,7 @@ export const Formulario = () => {
                                     <div>
                                         <label
                                             htmlFor="file"
+                                            required
                                             className="block mb-2">
                                             Adjuntar aviso de operaciones
                                             <span className="text-red-500">*</span>:
