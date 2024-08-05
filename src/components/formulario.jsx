@@ -989,6 +989,7 @@ export const Formulario = () => {
                                     </label>
                                     <BotonUpload
                                         handleFileChange={handleFileChange1}
+                                        required
                                     />
                                 </div>
                                 {persona === "juridica" ? (
@@ -1002,6 +1003,7 @@ export const Formulario = () => {
                                         </label>
                                         <BotonUpload
                                             handleFileChange={handleFileChange2}
+                                            required
                                         />
                                     </div>
                                 ) : (
