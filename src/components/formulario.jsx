@@ -40,7 +40,7 @@ export const Formulario = () => {
             "Milla8": ["milla8@almacenajes.net", "ventas.milla8@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
             "Gorgona": ["gorgona@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
             "David": ["david@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
-            "HatoMontana": ["hatomonatana@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"]
+            "HatoMontana": ["hatomontana@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"]
         };
         const emails = sucursalEmails[selectedSucursal] || [];
         const emailsText = emails.join(", ");
