@@ -9,6 +9,7 @@ function BotonUpload({ handleFileChange }) {
                 id=""
                 className="drop-zone lg:w-96 w-80 mx-auto h-100 font-quicksand text-16 rounded-5 flex cursor-pointer flex-col items-center justify-center border-4 border-dashed border-secondary p-4 text-center font-medium text-gray-400"
                 onChange={handleFileChange}
+                required                
             />
         </div>
     );

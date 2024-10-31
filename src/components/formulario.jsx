@@ -31,16 +31,16 @@ export const Formulario = () => {
     const handleSelectChange = event => {
         const selectedSucursal = event.target.value;
         const sucursalEmails = {
-            "Vista Hermosa": ["vistahermosa@almacenajes.net", "ventas.vistahermosa@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
-            "Costa del Este": ["costadeleste@almacenajes.net", "ventas.costadeleste@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
-            "Rio Abajo": ["rioabajo@almacenajes.net, ventas.rioabajo@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "VistaHermosa": ["vistahermosa@almacenajes.net", "ventas.vistahermosa@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "CostadelEste": ["costadeleste@almacenajes.net", "ventas.costadeleste@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "RioAbajo": ["rioabajo@almacenajes.net, ventas.rioabajo@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
             "Albrook": ["albrook@almacenajes.net", "ventas.albrook@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
-            "San Antonio": ["sanantonio@almacenajes.net", "ventas.sanantonio@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "SanAntonio": ["sanantonio@almacenajes.net", "ventas.sanantonio@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
             "Colon": ["colon@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
-            "Milla 8": ["milla8@almacenajes.net", "ventas.milla8@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+            "Milla8": ["milla8@almacenajes.net", "ventas.milla8@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
             "Gorgona": ["gorgona@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
             "David": ["david@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
-            "Hato Montana": ["hatomonatana@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"]
+            "HatoMontana": ["hatomontana@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"]
         };
         const emails = sucursalEmails[selectedSucursal] || [];
         const emailsText = emails.join(", ");
@@ -84,20 +84,20 @@ export const Formulario = () => {
                                     onChange={handleSelectChange}
                                     className="border border-gray-300 px-4 py-2 rounded-md w-full">
                                     <option value="">Seleccione:</option>
-                                    <option value="Vista Hermosa">
+                                    <option value="VistaHermosa">
                                         Vista Hermosa
                                     </option>
-                                    <option value="Costa del Este">
+                                    <option value="CostadelEste">
                                         Costa del Este
                                     </option>
-                                    <option value="Rio Abajo">Rio Abajo</option>
+                                    <option value="RioAbajo">Rio Abajo</option>
                                     <option value="Albrook">Albrook</option>
-                                    <option value="San Antonio">San Antonio</option>
+                                    <option value="SanAntonio">San Antonio</option>
                                     <option value="Colon">Colón</option>
-                                    <option value="Milla 8">Milla 8</option>
+                                    <option value="Milla8">Milla 8</option>
                                     <option value="Gorgona">Gorgona</option>
                                     <option value="David">David</option>
-                                    <option value="Hato Montana">
+                                    <option value="HatoMontana">
                                         Hato Montaña
                                     </option>
                                 </select>
@@ -983,24 +983,27 @@ export const Formulario = () => {
                             <hr className="my-5" />
                             <section>
                                 <div>
-                                    <label htmlFor="file" className="block mb-2">
+                                    <label htmlFor="file" className="block mb-2" required>
                                         Adjuntar Cédula o Pasaporte
                                         <span className="text-red-500">*</span>:
                                     </label>
                                     <BotonUpload
                                         handleFileChange={handleFileChange1}
+                                        required
                                     />
                                 </div>
                                 {persona === "juridica" ? (
                                     <div>
                                         <label
                                             htmlFor="file"
+                                            required
                                             className="block mb-2">
                                             Adjuntar aviso de operaciones
                                             <span className="text-red-500">*</span>:
                                         </label>
                                         <BotonUpload
                                             handleFileChange={handleFileChange2}
+                                            required
                                         />
                                     </div>
                                 ) : (
