@@ -17,9 +17,17 @@ const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 
 export async function uploadAndConvertFile(file) {
-    const fileName = file.name.replace(/[^\w\s]/gi, "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
-    const storageRef = ref(storage, `solicitudes/${fileName}`);
-    await uploadBytes(storageRef, file);
-    const downloadURL = await getDownloadURL(storageRef);
-    return downloadURL;
+    if (!file) return null;
+
+    try {
+        const fileName = file.name.replace(/[^\w\s]/gi, "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
+        const storageRef = ref(storage, `solicitudes/${fileName}`);
+        await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(storageRef);
+        return downloadURL;
+    } catch (error) {
+        console.error("Error uploading file: ", error);
+        return null;
+    }
 }
+
