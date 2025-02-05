@@ -1,52 +1,74 @@
-export const BrandsInfo = ({ register, errors }) => {
+
+export const BrandsInfo = ({ register }) => {
   const handleSelectChange = (event) => {
     const selectedSucursal = event.target.value
     const sucursalEmails = {
-      VistaHermosa: [
+      vh: [
         "vistahermosa@almacenajes.net",
         "ventas.vistahermosa@almacenajes.net",
         "callcenter2@almacenajes.net",
         "callcenter3@almacenajes.net",
       ],
-      CostadelEste: [
+      ce: [
         "costadeleste@almacenajes.net",
         "ventas.costadeleste@almacenajes.net",
         "callcenter2@almacenajes.net",
         "callcenter3@almacenajes.net",
       ],
-      RioAbajo: [
-        "rioabajo@almacenajes.net, ventas.rioabajo@almacenajes.net",
+      ra: [
+        "rioabajo@almacenajes.net",
+        "ventas.rioabajo@almacenajes.net",
         "callcenter2@almacenajes.net",
         "callcenter3@almacenajes.net",
       ],
-      Albrook: [
+      al: [
         "albrook@almacenajes.net",
         "ventas.albrook@almacenajes.net",
         "callcenter2@almacenajes.net",
         "callcenter3@almacenajes.net",
       ],
-      SanAntonio: [
+      sa: [
         "sanantonio@almacenajes.net",
         "ventas.sanantonio@almacenajes.net",
         "callcenter2@almacenajes.net",
         "callcenter3@almacenajes.net",
       ],
-      Colon: ["colon@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
-      Milla8: [
+      co: [
+        "colon@almacenajes.net",
+        "callcenter2@almacenajes.net",
+        "callcenter3@almacenajes.net"
+      ],
+      mocho: [
         "milla8@almacenajes.net",
         "ventas.milla8@almacenajes.net",
         "callcenter2@almacenajes.net",
         "callcenter3@almacenajes.net",
       ],
-      Gorgona: ["gorgona@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
-      David: ["david@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
-      HatoMontana: ["hatomontana@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
-      TumbaMuerto: ["ventas.tumbamuerto@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
-    }
-    const emails = sucursalEmails[selectedSucursal] || []
-    const emailsText = emails.join(", ")
-    register("emails", { value: emailsText })
-  }
+      go: [
+        "gorgona@almacenajes.net",
+        "callcenter2@almacenajes.net",
+        "callcenter3@almacenajes.net"
+      ],
+      da: [
+        "david@almacenajes.net",
+        "callcenter2@almacenajes.net",
+        "callcenter3@almacenajes.net"
+      ],
+      hm: [
+        "hatomontana@almacenajes.net",
+        "callcenter2@almacenajes.net",
+        "callcenter3@almacenajes.net"
+      ],
+      tm: [
+        "ventas.tumbamuerto@almacenajes.net",
+        "callcenter2@almacenajes.net",
+        "callcenter3@almacenajes.net"
+      ]
+    };
+    const emails = sucursalEmails[selectedSucursal] || [];
+    const emailsText = emails.join(", ");
+    register("emails", { value: emailsText });
+  };
 
   return (
     <section>
@@ -61,17 +83,17 @@ export const BrandsInfo = ({ register, errors }) => {
           className="border border-gray-300 px-4 py-2 rounded-md w-full"
         >
           <option value="">Seleccione:</option>
-          <option value="VistaHermosa">Vista Hermosa</option>
-          <option value="CostadelEste">Costa del Este</option>
-          <option value="RioAbajo">Rio Abajo</option>
-          <option value="Albrook">Albrook</option>
-          <option value="SanAntonio">San Antonio</option>
-          <option value="Colon">Colón</option>
-          <option value="Milla8">Milla 8</option>
-          <option value="Gorgona">Gorgona</option>
-          <option value="David">David</option>
-          <option value="HatoMontana">Hato Montaña</option>
-          <option value="TumbaMuerto">Tumba Muerto</option>
+          <option value="vh">Vista Hermosa</option>
+          <option value="ce">Costa del Este</option>
+          <option value="ra">Rio Abajo</option>
+          <option value="al">Albrook</option>
+          <option value="sa">San Antonio</option>
+          <option value="co">Colón</option>
+          <option value="mocho">Milla 8</option>
+          <option value="go">Gorgona</option>
+          <option value="da">David</option>
+          <option value="hm">Hato Montaña</option>
+          <option value="tm">Tumba Muerto</option>
         </select>
       </div>
 
