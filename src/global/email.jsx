@@ -2,9 +2,8 @@ import emailjs from "@emailjs/browser";
 
 export const sendCustomEmail = (data, judicial)  => {
     emailjs.init(import.meta.env.VITE_EMAIL_USER_ID);
-    const emailList = data.emails.split(",").map((email) => email.trim())
-    emailList.forEach((email) => {
-        emailjs.send(
+    emailjs
+        .send(
             import.meta.env.VITE_EMAIL_SERVICE_ID,
             import.meta.env.VITE_EMAIL_TEMPLATE_ID,
             {
@@ -66,7 +65,7 @@ export const sendCustomEmail = (data, judicial)  => {
                 telefonodemandante: data.telefonodemandante,
                 file1: data.file1,
                 file2: data.file2,
-                emails: email,
+                emails: data.emails,
                 proceso: judicial,
             } 
             
@@ -77,5 +76,4 @@ export const sendCustomEmail = (data, judicial)  => {
         .catch(err => {
             console.log("FAILED...", err);
         });
-    });
 };
