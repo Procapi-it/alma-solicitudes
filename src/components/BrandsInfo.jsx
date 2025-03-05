@@ -1,74 +1,54 @@
-
-export const BrandsInfo = ({ register }) => {
+export const BrandsInfo = ({ register, setValue }) => {
   const handleSelectChange = (event) => {
-    const selectedSucursal = event.target.value;
+    const selectedSucursal = event.target.value
     const sucursalEmails = {
       vh: [
         "vistahermosa@almacenajes.net",
         "ventas.vistahermosa@almacenajes.net",
         "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
+        "callcenter3@almacenajes.net",
       ],
       ce: [
         "costadeleste@almacenajes.net",
         "ventas.costadeleste@almacenajes.net",
         "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
+        "callcenter3@almacenajes.net",
       ],
       ra: [
         "rioabajo@almacenajes.net",
         "ventas.rioabajo@almacenajes.net",
         "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
+        "callcenter3@almacenajes.net",
       ],
       al: [
         "albrook@almacenajes.net",
         "ventas.albrook@almacenajes.net",
         "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
+        "callcenter3@almacenajes.net",
       ],
       sa: [
         "sanantonio@almacenajes.net",
         "ventas.sanantonio@almacenajes.net",
         "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
+        "callcenter3@almacenajes.net",
       ],
-      co: [
-        "colon@almacenajes.net",
-        "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
-      ],
+      co: ["colon@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
       mocho: [
         "milla8@almacenajes.net",
         "ventas.milla8@almacenajes.net",
         "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
+        "callcenter3@almacenajes.net",
       ],
-      go: [
-        "gorgona@almacenajes.net",
-        "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
-      ],
-      da: [
-        "david@almacenajes.net",
-        "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
-      ],
-      hm: [
-        "hatomontana@almacenajes.net",
-        "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
-      ],
-      tm: [
-        "ventas.tumbamuerto@almacenajes.net",
-        "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
-      ]
-    };
-    const emails = sucursalEmails[selectedSucursal] || [];
-    const emailsText = emails.join(", ");
-    register("emails", { value: emailsText });
-  };
+      go: ["gorgona@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+      da: ["david@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+      hm: ["hatomontana@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+      tm: ["ventas.tumbamuerto@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+    }
+    const emails = sucursalEmails[selectedSucursal] || []
+    const emailsText = emails.join(", ")
+
+    setValue("emails", emailsText)
+  }
 
   return (
     <section>
@@ -137,30 +117,19 @@ export const BrandsInfo = ({ register }) => {
             Motivo de uso del local?
             <span className="text-red-500">*</span>:
           </label>
-          <select
-            id="motivo"
-            {...register("motivo")}
-            className="border border-gray-300 px-4 py-2 rounded-md w-full"
-          >
+          <select id="motivo" {...register("motivo")} className="border border-gray-300 px-4 py-2 rounded-md w-full">
             <option value="">Seleccione:</option>
             <option value="Viaje">Viaje</option>
             <option value="Reducción de gastos">Reducción de Gastos</option>
             <option value="Alquilo su vivienda">Alquilo su vivienda</option>
-            <option value="mLibera espacio de vivienda actual">
-              Libera espacio en vivienda actual
-            </option>
-            <option value="Falta de espacio en negocio">
-              Falta de espacio en negocio
-            </option>
-            <option value="mEspera entrega de casa">
-              Espera entrega de casa
-            </option>
-            <option value="No tiene espacio propio">
-              No tiene espacio propio
-            </option>
+            <option value="mLibera espacio de vivienda actual">Libera espacio en vivienda actual</option>
+            <option value="Falta de espacio en negocio">Falta de espacio en negocio</option>
+            <option value="mEspera entrega de casa">Espera entrega de casa</option>
+            <option value="No tiene espacio propio">No tiene espacio propio</option>
           </select>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
+
