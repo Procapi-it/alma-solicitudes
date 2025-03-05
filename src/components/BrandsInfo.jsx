@@ -1,5 +1,4 @@
-
-export const BrandsInfo = ({ register }) => {
+export const BrandsInfo = ({ register, setValue }) => {
   const handleSelectChange = (event) => {
     const selectedSucursal = event.target.value
     const sucursalEmails = {
@@ -33,42 +32,23 @@ export const BrandsInfo = ({ register }) => {
         "callcenter2@almacenajes.net",
         "callcenter3@almacenajes.net",
       ],
-      co: [
-        "colon@almacenajes.net",
-        "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
-      ],
+      co: ["colon@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
       mocho: [
         "milla8@almacenajes.net",
         "ventas.milla8@almacenajes.net",
         "callcenter2@almacenajes.net",
         "callcenter3@almacenajes.net",
       ],
-      go: [
-        "gorgona@almacenajes.net",
-        "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
-      ],
-      da: [
-        "david@almacenajes.net",
-        "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
-      ],
-      hm: [
-        "hatomontana@almacenajes.net",
-        "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
-      ],
-      tm: [
-        "ventas.tumbamuerto@almacenajes.net",
-        "callcenter2@almacenajes.net",
-        "callcenter3@almacenajes.net"
-      ]
-    };
-    const emails = sucursalEmails[selectedSucursal] || [];
-    const emailsText = emails.join(", ");
-    register("emails", { value: emailsText });
-  };
+      go: ["gorgona@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+      da: ["david@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+      hm: ["hatomontana@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+      tm: ["ventas.tumbamuerto@almacenajes.net", "callcenter2@almacenajes.net", "callcenter3@almacenajes.net"],
+    }
+    const emails = sucursalEmails[selectedSucursal] || []
+    const emailsText = emails.join(", ")
+
+    setValue("emails", emailsText)
+  }
 
   return (
     <section>

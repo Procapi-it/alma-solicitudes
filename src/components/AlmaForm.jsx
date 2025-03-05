@@ -1,28 +1,29 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { sendCustomEmail } from "../global/email";
-import { Completed } from "./completed";
-import { BrandsInfo } from "./BrandsInfo";
-import { PersonalInfo } from "./PersonalInfo";
-import { AuthorizedPersons } from "./AuthorizedPersons";
-import { StorageUsage } from "./StorageUsage";
-import { FileUpload } from "./FileUpload";
-import { JudicialProcess } from "./JudicialProcess";
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { sendCustomEmail } from "../global/email"
+import { Completed } from "./completed"
+import { BrandsInfo } from "./BrandsInfo"
+import { PersonalInfo } from "./PersonalInfo"
+import { AuthorizedPersons } from "./AuthorizedPersons"
+import { StorageUsage } from "./StorageUsage"
+import { FileUpload } from "./FileUpload"
+import { JudicialProcess } from "./JudicialProcess"
 
 export const AlmaForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm();
-  const [persona, setPersona] = useState("natural");
-  const [judicial, setJudicial] = useState("no");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+    setValue,
+    formState: { errors },
+  } = useForm()
+  const [persona, setPersona] = useState("natural")
+  const [judicial, setJudicial] = useState("no")
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const onSubmit = (data) => {
-    sendCustomEmail(data, judicial);
-    setIsSubmitted(true);
-  };
+    sendCustomEmail(data, judicial)
+    setIsSubmitted(true)
+  }
 
   return (
     <>
@@ -30,22 +31,12 @@ export const AlmaForm = () => {
         <Completed />
       ) : (
         <section className="flex flex-col items-center justify-center">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="border mt-5 mx-auto"
-          >
-            <h2 className="text-md font-bold mb-4 text-start mt-5">
-              Los campos con (*) son obligatorios
-            </h2>
+          <form onSubmit={handleSubmit(onSubmit)} className="border mt-5 mx-auto">
+            <h2 className="text-md font-bold mb-4 text-start mt-5">Los campos con (*) son obligatorios</h2>
 
-            <BrandsInfo register={register} errors={errors} />
+            <BrandsInfo register={register} errors={errors} setValue={setValue} />
 
-            <PersonalInfo
-              register={register}
-              errors={errors}
-              persona={persona}
-              setPersona={setPersona}
-            />
+            <PersonalInfo register={register} errors={errors} persona={persona} setPersona={setPersona} />
 
             <hr className="my-5" />
 
@@ -59,11 +50,7 @@ export const AlmaForm = () => {
 
             <FileUpload register={register} persona={persona} />
 
-            <JudicialProcess
-              register={register}
-              judicial={judicial}
-              setJudicial={setJudicial}
-            />
+            <JudicialProcess register={register} judicial={judicial} setJudicial={setJudicial} />
 
             <section>
               <div className="flex justify-center">
@@ -79,6 +66,6 @@ export const AlmaForm = () => {
         </section>
       )}
     </>
-  );
-};
+  )
+}
 
