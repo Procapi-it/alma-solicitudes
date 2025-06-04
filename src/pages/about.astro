@@ -1,0 +1,302 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeaderAstro from '../components/HeaderAstro.astro';
+import SocialFooter from '../components/SocialFooter.astro';
+import PipedriveChat from '../components/PipedriveChat.astro';
+import GcsImage from '../components/GcsImage.astro';
+
+// Datos del equipo (comentado temporalmente)
+/*
+const teamMembers = [
+  {
+    name: "Alejandro Moreno",
+    position: "CEO & Fundador",
+    image: "team_alejandro_s8zcvo",
+    bio: "Con más de 15 años de experiencia en el sector inmobiliario de Panamá, Alejandro fundó Haus Panama con la visión de transformar la forma en que las personas adquieren propiedades."
+  },
+  {
+    name: "María Sánchez",
+    position: "Directora de Proyectos",
+    image: "team_maria_vzlnpk",
+    bio: "Arquitecta con maestría en Desarrollo Urbano Sostenible, María supervisa todos nuestros proyectos para garantizar la más alta calidad y sostenibilidad."
+  },
+  {
+    name: "Carlos Reyes",
+    position: "Director Comercial",
+    image: "team_carlos_gq6ruz",
+    bio: "Experto en ventas inmobiliarias, Carlos lidera nuestro equipo comercial con un enfoque centrado en la satisfacción del cliente y soluciones personalizadas."
+  }
+];
+*/
+// Definimos un array vacío para evitar errores
+const teamMembers = [];
+
+// Datos de los hitos
+const milestones = [
+  {
+    year: "2004",
+    title: "Fundación",
+    description: "Haus Panama nace con la misión de ofrecer viviendas bien ubicadas y accesibles para la clase media. Nuestra visión: contribuir a la construcción de un país con una sólida clase media, facilitando el acceso a hogares de calidad, con ubicaciones estratégicas que permitan un mejor estilo de vida y acceso a servicios esenciales."
+  },
+  {
+    year: "2013",
+    title: "Expansión Residencial",
+    description: "Inauguramos la prestigiosa 'Serie Alegria', un ambicioso proyecto que contempla ocho edificios diseñados bajo estrictos parámetros de diseño, construcción, sostenibilidad y funcionalidad. Esta serie marca un hito en nuestra trayectoria y establece nuevos estándares en el mercado inmobiliario panameño."
+  },
+  {
+    year: "2017",
+    title: "Afianzamiento en el Desarrollo Vertical",
+    description: "Lanzamos nuestra segunda línea de proyectos denominada 'Serie Amistad', con tres desarrollos estratégicamente ubicados en el sector este de la ciudad. Este logro consolida nuestro crecimiento en el desarrollo vertical, alcanzando un portafolio de 16 proyectos distribuidos en puntos clave de la ciudad de Panamá."
+  },
+  {
+    year: "2019",
+    title: "Expansión Sector Oeste",
+    description: "Respondiendo a la creciente demanda y tras un exhaustivo análisis de mercado, iniciamos operaciones en el área Oeste de la ciudad. Este movimiento estratégico nos permite contribuir significativamente al desarrollo inmobiliario de un sector con alto potencial y demanda sostenida."
+  },
+  {
+    year: "2020",
+    title: "Resiliencia ante la Pandemia",
+    description: "Nuestro crecimiento acelerado enfrentó el desafío global del COVID-19, que impactó severamente al sector inmobiliario. Demostrando nuestra capacidad de adaptación, implementamos estrategias innovadoras para mantener la viabilidad de nuestros proyectos durante este período de incertidumbre económica y social."
+  },
+  {
+    year: "2023",
+    title: "Recuperación y Renovación",
+    description: "Alcanzamos nuevamente los niveles de absorción pre-pandemia, superando contratiempos y crisis sociales. Nos enfocamos en el desarrollo de apartamentos compactos y céntricos, diseñados para reducir tiempos de desplazamiento y mejorar significativamente la calidad de vida de nuestros residentes."
+  }
+];
+
+// Valores de la empresa
+const values = [
+  {
+    title: "Calidad",
+    icon: "Sobre_nosotros_-_Calidad_icon_njzayr",
+    description: "Nos comprometemos a ofrecer solo propiedades que cumplan con los más altos estándares de calidad."
+  },
+  {
+    title: "Sostenibilidad",
+    icon: "Sobre_nosotros_-_Sostenibilidad_icon_qhmxsp",
+    description: "Todos nuestros proyectos incorporan prácticas sostenibles y respetuosas con el medio ambiente."
+  },
+  {
+    title: "Transparencia",
+    icon: "Sobre_nosotros_-_comunicacion_icon_epx1pp",
+    description: "Creemos en la comunicación clara y honesta con nuestros clientes en cada etapa del proceso."
+  },
+  {
+    title: "Innovación",
+    icon: "Sobre_nosotros_-_innovacion_icon_gjsce7",
+    description: "Constantemente buscamos nuevas formas de mejorar nuestros proyectos y servicios."
+  }
+];
+---
+
+<Layout title="Sobre Nosotros - Haus Panama">
+  <HeaderAstro />
+  
+
+      
+      <!-- Contenido del hero -->
+      <div class="relative z-10 flex flex-col items-center justify-center h-full text-center w-full px-4">
+        <!-- Imagen 3D en formato banner -->
+        <div class="flex justify-center items-center w-full h-full py-1 md:py-0">
+          <GcsImage 
+            publicId="Icons/Haus_construccion_emojis_3D_-_version_2_xkubfy.png" 
+            alt="Haus Panama Construcción" 
+            className="w-full max-h-[1200px] md:w-auto md:h-[420px] lg:h-[370px] object-contain" 
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nuestra Historia Section -->
+  <section class="py-8 md:py-12 bg-[var(--background)] px-4">
+    <div class="max-w-7xl mx-auto max-container">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-4">nuestra <span class="text-[var(--secondary)]">historia</span></h2>
+        <div class="w-16 h-[2px] bg-[var(--secondary)] mx-auto mb-8"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-6xl mx-auto">
+        <div class="bg-white rounded-lg shadow-md border-l-2 border-[var(--secondary)] h-full flex flex-col">
+          <div class="p-6 flex flex-col h-full">
+            <h3 class="font-bold text-[var(--primary)] text-xl mb-4">visión</h3>
+            <p class="text-gray-700 leading-relaxed flex-grow">
+              Haus Panama nació de una visión transformadora para el mercado inmobiliario panameño. Como empresa sólida y dinámica, hemos desarrollado la capacidad de gestionar múltiples proyectos simultáneamente con excelencia y precisión. Nuestra fortaleza se sustenta en tres pilares fundamentales que definen nuestra identidad: nuestra gente apasionada, metodologías innovadoras y tecnología de vanguardia.
+            </p>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-md border-l-2 border-[var(--secondary)] h-full flex flex-col">
+          <div class="p-6 flex flex-col h-full">
+            <h3 class="font-bold text-[var(--primary)] text-xl mb-4">compromiso</h3>
+            <p class="text-gray-700 leading-relaxed flex-grow">
+              Nos enorgullece crear comunidades habitacionales donde la armonía y el bienestar son prioridad. Cada proyecto está estratégicamente ubicado para ofrecer cercanía a centros laborales, comerciales y de entretenimiento, permitiendo a nuestros residentes disfrutar de una calidad de vida excepcional. La seguridad, el diseño inteligente y la sostenibilidad son valores que incorporamos en cada desarrollo, creando espacios donde las familias pueden prosperar y crear recuerdos duraderos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <div class="w-16 h-[2px] bg-[var(--secondary)] mx-auto mb-4"></div>
+      </div>
+      
+      <!-- Timeline de Hitos -->
+      <div class="relative space-y-8 mb-12 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-[var(--secondary)] before:to-transparent">
+        <!-- Logo viejo al inicio del timeline -->
+        <div class="relative flex items-center justify-center mb-8">
+          <GcsImage 
+            publicId="Icons/Logo_viejo_haus_3d_ico_f9ctnr.png" 
+            alt="Logo inicial Haus Panama" 
+            className="w-52 h-52 md:w-72 md:h-72 object-contain" 
+          />
+        </div>
+        
+        <!-- Hitos del timeline -->
+        {milestones.map((milestone, index) => (
+          <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-[var(--primary)] bg-white text-[var(--primary)] group-[.is-active]:bg-[var(--primary)] group-[.is-active]:text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+              <span class="font-bold">{milestone.year.substring(2)}</span>
+            </div>
+            
+            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[var(--secondary)] p-4 md:p-6 rounded-lg shadow-md border-l-2 border-[var(--primary)]">
+              <div class="font-bold text-[var(--background)] mb-1">{milestone.year}</div>
+              <div class="text-xl font-bold text-[var(--primary)] mb-2">{milestone.title}</div>
+              <div class="text-[var(--background)]">{milestone.description}</div>
+            </div>
+          </div>
+        ))}
+        
+        <!-- Logo nuevo al final del timeline -->
+        <div class="relative flex items-center justify-center mt-8">
+          <GcsImage 
+            publicId="Icons/Logo_haus_3D_icon_bbiuye.png" 
+            alt="Logo actual Haus Panama" 
+            className="w-52 h-52 md:w-72 md:h-72 object-contain" 
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nuestros Valores Section -->
+  <section class="py-16 md:py-24 bg-white px-4">
+    <div class="max-w-7xl mx-auto max-container">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-4">nuestros <span class="text-[var(--secondary)]">valores</span></h2>
+        <div class="w-16 h-[1px] bg-[var(--secondary)] mx-auto mb-8"></div>
+        <p class="max-w-3xl mx-auto text-gray-700">
+          Estos principios fundamentales guían cada decisión que tomamos y cada proyecto que desarrollamos.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {values.map(value => (
+          <div class="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:transform hover:scale-105 hover:shadow-lg border-t-2 border-[var(--secondary)]">
+            <div class="flex justify-center mb-4">
+              <GcsImage 
+                publicId={`Icons/${value.icon}.png`} 
+                alt={value.title} 
+                className="w-22 h-22" 
+              />
+            </div>
+            <h3 class="text-xl font-bold text-center text-[var(--primary)] mb-3">{value.title}</h3>
+            <p class="text-gray-700 text-center">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Sección de Nuestro Equipo comentada temporalmente 
+  <!-- Nuestro Equipo Section -->
+  <section class="py-16 md:py-24 bg-[var(--background)] px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-[var(--primary)] mb-4">nuestro <span class="text-[var(--secondary)]">equipo</span></h2>
+        <div class="w-16 h-[1px] bg-[var(--secondary)] mx-auto mb-8"></div>
+        <p class="max-w-3xl mx-auto text-gray-700">
+          Contamos con un equipo de profesionales apasionados y comprometidos con la excelencia.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {teamMembers.map(member => (
+          <div class="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:transform hover:scale-105 hover:shadow-lg border-t-2 border-[var(--secondary)]">
+            <div class="mb-4 overflow-hidden rounded-full w-32 h-32 mx-auto ring-4 ring-[var(--secondary)]/20">
+              <GcsImage 
+                publicId={`Personas/${member.image}.png`} 
+                alt={member.name} 
+                className="w-full h-full object-cover" 
+              />
+            </div>
+            <h3 class="text-xl font-bold text-center text-[var(--primary)] mb-1">{member.name}</h3>
+            <p class="text-[var(--secondary)] font-medium text-center mb-4">{member.position}</p>
+            <p class="text-gray-700 text-center">{member.bio}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  */}
+
+  <!-- Contact CTA Section -->
+  <section class="py-16 md:py-24 px-4 mb-6 relative overflow-hidden">
+    <!-- Imagen de fondo -->
+    <div class="absolute inset-0 z-0">
+      <GcsImage 
+        publicId="Backgrounds/siluetas-del-sitio-de-construccion_niweog.jpg" 
+        alt="Fondo de apartamento" 
+        className="w-full h-full object-cover" 
+      />
+      <!-- Overlay oscuro para mejorar legibilidad -->
+      <div class="absolute inset-0 bg-black/60"></div>
+    </div>
+    
+    <div class="max-w-4xl mx-auto text-center relative z-10 max-container">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">¿listo para encontrar tu hogar ideal?</h2>
+      <p class="text-white text-lg mb-8 max-w-2xl mx-auto">
+        Nuestro equipo está preparado para ayudarte a encontrar la propiedad perfecta para ti y tu familia.
+      </p>
+      <a href="/" class="inline-block bg-[var(--primary)] text-[var(--background)] font-bold py-3 px-8 rounded-xl transition-transform duration-300 hover:transform hover:scale-105 shadow-lg">
+        proyectos
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <SocialFooter />
+  
+  <!-- Pipedrive LeadBooster Chat -->
+  <PipedriveChat />
+</Layout>
+
+<style>
+  /* Estilo para el efecto de máscara del hero */
+  .mask-linear-gradient-to-t {
+    mask-image: linear-gradient(to top, transparent, black 35%);
+  }
+  
+  /* Animaciones para los elementos al hacer scroll */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  section {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+</style>
+
+<script>
+  // Importar el servicio para manejar las animaciones de la línea de tiempo
+  import { initTimelineAnimations } from '../services/animations/timelineAnimations';
+  
+  // Inicializar las animaciones cuando el DOM esté cargado
+  document.addEventListener('DOMContentLoaded', initTimelineAnimations);
+</script>

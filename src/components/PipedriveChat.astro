@@ -1,0 +1,29 @@
+---
+// Componente para el chatbot de Pipedrive LeadBooster con posición personalizada
+---
+
+<!-- Configuración básica de Pipedrive -->
+<script is:inline>
+  window.pipedriveLeadboosterConfig = {
+    base: 'leadbooster-chat.pipedrive.com',
+    companyId: 5911154,
+    playbookUuid: '1bae8662-bc02-43ac-b9fd-5a0806ef65bd',
+    version: 2
+  };
+  
+  (function () {
+    var w = window;
+    if (w.LeadBooster) {
+      console.warn('LeadBooster already exists');
+    } else {
+      w.LeadBooster = {
+        q: [],
+        on: function (n, h) { this.q.push({ t: 'o', n: n, h: h }); },
+        trigger: function (n) { this.q.push({ t: 't', n: n }); }
+      };
+    }
+  })();
+</script>
+
+<!-- Cargar el script de Pipedrive -->
+<script is:inline src="https://leadbooster-chat.pipedrive.com/assets/loader.js" async></script>

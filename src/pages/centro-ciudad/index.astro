@@ -1,0 +1,15 @@
+---
+import PropertyCategoryLayout from '../../layouts/PropertyLayout/PropertyCategoryLayout.astro';
+import properties from '../../data/properties.json';
+
+const category = properties.categories.find(cat => cat.id === 'centro-ciudad');
+
+// Valores predeterminados por si no se encuentra la categoría
+const title = category?.title || 'Apartamentos en el centro de la ciudad';
+const categoryProperties = category?.properties || [];
+---
+
+<PropertyCategoryLayout 
+  title={title}
+  properties={categoryProperties}
+/>

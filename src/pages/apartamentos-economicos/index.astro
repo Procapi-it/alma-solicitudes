@@ -1,0 +1,15 @@
+---
+import PropertyCategoryLayout from '../../layouts/PropertyLayout/PropertyCategoryLayout.astro';
+import properties from '../../data/properties.json';
+
+const category = properties.categories.find(cat => cat.id === 'apartamentos-economicos');
+
+// Valores predeterminados por si no se encuentra la categoría
+const title = category?.title || 'Apartamentos económicos';
+const categoryProperties = category?.properties || [];
+---
+
+<PropertyCategoryLayout 
+  title={title}
+  properties={categoryProperties}
+/>

@@ -1,0 +1,171 @@
+---
+/**
+ * GcsVideo.astro
+ * Componente para mostrar videos desde Google Cloud Storage
+ */
+import { getGcsUrl } from '../lib/gcs';
+
+interface Props {
+  videoId: string;     // El public ID del video en GCS (incluyendo carpeta y extensión)
+  thumbnailPath: string; // Ruta a la miniatura del video
+  altText?: string;    // Texto alternativo para la miniatura
+  className?: string;  // Clases CSS para el contenedor
+}
+
+const { videoId, thumbnailPath, altText = "Video del proyecto", className = "" } = Astro.props;
+
+// Generar URL del video usando la utilidad de GCS
+const videoUrl = getGcsUrl(videoId);
+
+// Procesar la ruta de la miniatura
+// Si es una ruta local o una URL completa, usarla directamente, de lo contrario pasarla por getGcsUrl
+const thumbnailUrl = thumbnailPath.startsWith('/') || thumbnailPath.startsWith('http')
+  ? thumbnailPath 
+  : getGcsUrl(thumbnailPath);
+---
+
+<div class:list={["relative w-full h-full aspect-video rounded-lg overflow-hidden shadow-lg border border-gray-100 gcs-video-container", className]}>
+  <!-- Miniatura del video -->
+  <img 
+    src={thumbnailUrl} 
+    alt={altText} 
+    class="w-full h-full object-cover gcs-video-thumbnail" 
+  />
+  
+  <!-- Botón de reproducción -->
+  <div class="absolute inset-0 flex items-center justify-center gcs-video-play-button">
+    <button 
+      type="button" 
+      class="bg-white/80 rounded-full w-16 h-16 flex items-center justify-center hover:bg-white transition-all duration-300"
+    >
+      <div class="ml-1 w-0 h-0 border-t-[10px] border-t-transparent border-l-[18px] border-l-[var(--secondary)] border-b-[10px] border-b-transparent"></div>
+    </button>
+  </div>
+  
+  <!-- Elemento de video (inicialmente oculto) -->
+  <video 
+    src={videoUrl} 
+    class="w-full h-full hidden gcs-video-player" 
+    controls
+  ></video>
+</div>
+
+<script>
+  // Función para esperar a que el DOM esté completamente cargado y luego inicializar los videos
+  function initializeVideos() {
+    try {
+      // Primero verificamos si el DOM está listo
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupVideos);
+      } else {
+        // Si ya está cargado, configuramos los videos inmediatamente
+        setupVideos();
+      }
+    } catch (error: unknown) {
+      console.error('Error al inicializar videos:', error);
+    }
+  }
+
+  // Función principal para configurar todos los videos
+  function setupVideos() {
+    try {
+      const containers = document.querySelectorAll('.gcs-video-container');
+      console.log('Inicializando componente de video GCS, contenedores encontrados:', containers.length);
+      
+      if (containers.length === 0) {
+        console.log('No se encontraron contenedores de video');
+        return;
+      }
+      
+      containers.forEach((container, index) => {
+        try {
+          if (!container) return;
+          
+          const playButton = container.querySelector('.gcs-video-play-button');
+          const thumbnail = container.querySelector('.gcs-video-thumbnail');
+          const video = container.querySelector('.gcs-video-player');
+          
+          if (!playButton || !thumbnail || !video) {
+            console.error(`Container ${index}: Algunos elementos no se encontraron:`, { 
+              playButton: !!playButton, 
+              thumbnail: !!thumbnail, 
+              video: !!video 
+            });
+            return;
+          }
+          
+          // Configurar el video correctamente
+          setupSingleVideo(playButton, thumbnail, video as HTMLVideoElement);
+        } catch (containerError: unknown) {
+          console.error(`Error en el contenedor ${index}:`, containerError);
+        }
+      });
+    } catch (setupError) {
+      console.error('Error en setupVideos:', setupError);
+    }
+  }
+  
+  // Configurar un solo video
+  function setupSingleVideo(playButton: Element, thumbnail: Element, video: HTMLVideoElement) {
+    try {
+      // Agregar listener para eventos de error del video
+      video.addEventListener('error', (e: Event) => {
+        console.error('Error de carga del video:', video.error?.message || 'Error desconocido');
+        console.error('Código del error:', video.error?.code || 'N/A');
+        
+        // Volver a mostrar la miniatura y el botón
+        if (thumbnail) thumbnail.classList.remove('hidden');
+        if (playButton) playButton.classList.remove('hidden');
+        if (video) video.classList.add('hidden');
+      });
+      
+      // Configurar el botón de reproducción
+      playButton.addEventListener('click', () => {
+        console.log('Clic en botón de play');
+        
+        // Ocultar miniatura y botón
+        if (thumbnail) thumbnail.classList.add('hidden');
+        if (playButton) playButton.classList.add('hidden');
+        
+        // Mostrar y reproducir video
+        if (video) {
+          video.classList.remove('hidden');
+          
+          // Carga y reproducir video
+          video.load(); // Forzar la carga del video
+          console.log('Intentando reproducir video desde:', video.src);
+          
+          // Reproducir video
+          try {
+            const playPromise = video.play();
+            
+            if (playPromise !== undefined) {
+              playPromise.then(() => {
+                console.log('Video reproduciendo correctamente');
+              }).catch((playError: Error) => {
+                console.error('Error al reproducir el video:', playError);
+                
+                // Volver a mostrar la miniatura y el botón en caso de error
+                if (thumbnail) thumbnail.classList.remove('hidden');
+                if (playButton) playButton.classList.remove('hidden');
+                if (video) video.classList.add('hidden');
+              });
+            }
+          } catch (playError: unknown) {
+            console.error('Error al intentar reproducir:', playError);
+            
+            // Volver a mostrar la miniatura y el botón en caso de error
+            if (thumbnail) thumbnail.classList.remove('hidden');
+            if (playButton) playButton.classList.remove('hidden');
+            if (video) video.classList.add('hidden');
+          }
+        }
+      });
+    } catch (setupError) {
+      console.error('Error en setupSingleVideo:', setupError);
+    }
+  }
+  
+  // Iniciar todo el proceso
+  initializeVideos();
+</script>

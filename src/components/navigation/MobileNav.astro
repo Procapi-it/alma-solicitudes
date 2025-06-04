@@ -1,0 +1,252 @@
+---
+import GcsImage from '../GcsImage.astro';
+
+// Proyectos organizados por zona para el menú móvil
+const projectsByZone = {
+  centro: [
+    { name: "áthas", path: "/athas" },
+    { name: "gaudí", path: "/gaudi" },
+    { name: "alai", path: "/alai" }
+  ],
+  este: [
+    { name: "amitié", path: "/amitie" },
+    { name: "lagun", path: "/lagun" },
+    { name: "filia", path: "/filia" },
+    { name: "provenza", path: "/casas-este" }
+  ],
+  oeste: [
+    { name: "verona", path: "/verona" },
+    { name: "piamonte", path: "/piamonte" },
+    { name: "siena", path: "/siena" }
+  ]
+};
+---
+
+<!-- Mobile menu overlay -->
+<div 
+  id="mobile-menu" 
+  class="fixed top-0 left-0 w-full h-screen z-40 hidden flex-col bg-white transition-all duration-300 ease-in-out transform opacity-0 -translate-y-4"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación móvil"
+>
+  <div class="flex justify-start items-center px-4 py-2.5 border-b border-gray-100/20 bg-[var(--secondary)]/20 backdrop-blur-sm">
+    <a href="/">
+      <GcsImage 
+        publicId="Logos/logohaus_usiwqr.svg" 
+        alt="Haus Panama Logo" 
+        className="h-8" 
+      />
+    </a>
+  </div>
+  <nav class="flex-1 overflow-y-auto" aria-label="Navegación principal">
+    <ul class="py-6 px-4 space-y-4">
+      <li class="border-b border-gray-100/20 pb-2">
+        <a 
+          href="/" 
+          class="text-xl py-3.5 px-4 block font-medium text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)] hover:translate-x-1"
+        >
+          inicio
+        </a>
+      </li>
+      <li class="border-b border-gray-100/20 pb-2">
+        <a 
+          href="/about" 
+          class="text-xl py-3.5 px-4 block font-medium text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)] hover:translate-x-1"
+        >
+          sobre nosotros
+        </a>
+      </li>
+      <li class="border-b border-gray-100/20 pb-2">
+        <div class="relative">
+          <!-- Dropdown toggle for mobile - Proyectos principal -->
+          <button 
+            id="projects-dropdown-toggle" 
+            class="flex items-center justify-between w-full text-xl py-3.5 px-4 font-medium text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)]"
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-controls="projects-dropdown-content"
+          >
+            <span>proyectos</span>
+            <svg id="dropdown-icon-down" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+            <svg id="dropdown-icon-up" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+              <path d="m18 15-6-6-6 6"/>
+            </svg>
+          </button>
+          
+          <div 
+            id="projects-dropdown-content" 
+            class="hidden mt-2 space-y-2 pl-2"
+            role="menu"
+            aria-labelledby="projects-dropdown-toggle"
+          >
+            <!-- Centro submenu -->
+            <div class="relative">
+              <button 
+                id="centro-dropdown-toggle" 
+                class="flex items-center justify-between w-full text-lg py-2 px-4 font-bold text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)]"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="centro-dropdown-content"
+              >
+                <span>Centro</span>
+                <svg class="centro-dropdown-icon-down" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+                <svg class="centro-dropdown-icon-up hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m18 15-6-6-6 6"/>
+                </svg>
+              </button>
+              
+              <div 
+                id="centro-dropdown-content" 
+                class="hidden pl-4 space-y-1"
+                role="menu"
+                aria-labelledby="centro-dropdown-toggle"
+              >
+                {projectsByZone.centro.map(project => (
+                  <a 
+                    href={project.path} 
+                    class="block py-2 px-4 text-md text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)] hover:font-bold hover:translate-x-1 transform"
+                    role="menuitem"
+                  >
+                    {project.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+            
+            <!-- Este submenu -->
+            <div class="relative">
+              <button 
+                id="este-dropdown-toggle" 
+                class="flex items-center justify-between w-full text-lg py-2 px-4 font-bold text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)]"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="este-dropdown-content"
+              >
+                <span>Este</span>
+                <svg class="este-dropdown-icon-down" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+                <svg class="este-dropdown-icon-up hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m18 15-6-6-6 6"/>
+                </svg>
+              </button>
+              
+              <div 
+                id="este-dropdown-content" 
+                class="hidden pl-4 space-y-1"
+                role="menu"
+                aria-labelledby="este-dropdown-toggle"
+              >
+                {projectsByZone.este.map(project => (
+                  <a 
+                    href={project.path} 
+                    class="block py-2 px-4 text-md text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)] hover:font-bold hover:translate-x-1 transform"
+                    role="menuitem"
+                  >
+                    {project.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+            
+            <!-- Oeste submenu -->
+            <div class="relative">
+              <button 
+                id="oeste-dropdown-toggle" 
+                class="flex items-center justify-between w-full text-lg py-2 px-4 font-bold text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)]"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="oeste-dropdown-content"
+              >
+                <span>Oeste</span>
+                <svg class="oeste-dropdown-icon-down" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+                <svg class="oeste-dropdown-icon-up hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m18 15-6-6-6 6"/>
+                </svg>
+              </button>
+              
+              <div 
+                id="oeste-dropdown-content" 
+                class="hidden pl-4 space-y-1"
+                role="menu"
+                aria-labelledby="oeste-dropdown-toggle"
+              >
+                {projectsByZone.oeste.map(project => (
+                  <a 
+                    href={project.path} 
+                    class="block py-2 px-4 text-md text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)] hover:font-bold hover:translate-x-1 transform"
+                    role="menuitem"
+                  >
+                    {project.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="border-b border-gray-100/20 pb-2">
+        <a href="/contacto" class="text-xl py-3.5 px-4 block font-medium text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)] hover:translate-x-1">
+          contáctenos
+        </a>
+      </li>
+      <li class="border-b border-gray-100/20 pb-2">
+        <a href="/terminos-legales" class="text-xl py-3.5 px-4 block font-medium text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)] hover:translate-x-1">
+          términos legales
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<button 
+  id="mobile-menu-button" 
+  class="z-50 xl:hidden focus:outline-none fixed top-2.5 right-4 md:right-8" 
+  aria-label="Abrir menú de navegación"
+  aria-expanded="false"
+  aria-controls="mobile-menu"
+>
+  <svg 
+    id="menu-icon" 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="32" 
+    height="32" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    stroke-width="2.5" 
+    stroke-linecap="round" 
+    stroke-linejoin="round" 
+    class="h-8 w-8 stroke-[2.5px] transition-all duration-300"
+    aria-hidden="true"
+  >
+    <line x1="4" x2="20" y1="12" y2="12" />
+    <line x1="4" x2="20" y1="6" y2="6" />
+    <line x1="4" x2="20" y1="18" y2="18" />
+  </svg>
+  <svg 
+    id="close-icon" 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="32" 
+    height="32" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    stroke-width="2.5" 
+    stroke-linecap="round" 
+    stroke-linejoin="round" 
+    class="h-8 w-8 stroke-[2.5px] transition-all duration-300 hidden"
+    aria-hidden="true"
+  >
+    <path d="M18 6 6 18" />
+    <path d="m6 6 12 12" />
+  </svg>
+</button>

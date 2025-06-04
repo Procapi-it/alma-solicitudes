@@ -1,0 +1,160 @@
+---
+import Layout from '../Layout.astro';
+import SocialFooter from '../../components/SocialFooter.astro';
+import MapModal from '../../components/MapModal';
+
+// URLs para las imágenes en Google Cloud Storage
+const coverImageUrl = "https://storage.googleapis.com/hauspanama/Proyectos/Este/Provenza/Render_Provenza.webp";
+const floorplanImageUrl = "https://storage.googleapis.com/hauspanama/Proyectos/Este/Provenza/Master_plan_provenza.webp";
+const backgroundImageUrl = "https://storage.googleapis.com/hauspanama/Proyectos/Este/Provenza/Provenza_background.webp";
+const logoUrl = "https://storage.googleapis.com/hauspanama/Portadas/Logo_Provenza.svg";
+---
+
+<Layout title={`Provenza | Haus Panama`}>
+  <!-- Imagen de fondo semitransparente -->
+  <div class="fixed inset-0 w-full h-full z-0 pointer-events-none opacity-20">
+    <img 
+      src={backgroundImageUrl}
+      alt=""
+      class="w-full h-full object-cover"
+      loading="eager"
+    />
+  </div>
+  
+  <!-- Layout del Este - Estructura en secciones separadas -->
+  <main class="relative z-10 w-full max-w-[1600px] mx-auto px-4 lg:px-8">
+    <div class="bg-[var(--primary)] text-white text-center py-2 px-2 animate-pulse rounded-full font-bold text-2xl mt-6 mb-8 w-1/2 lg:w-1/3 mx-auto">
+      nuevo modelo
+    </div>
+    <!-- Hero con etiqueta nuevo modelo y logo en caja blanca -->
+    <div class="relative w-full">
+        <!-- Imagen de fondo -->
+        <div class="w-full h-[400px] md:h-[500px] lg:h-[600px] relative">
+          <img 
+            src={coverImageUrl}
+            alt="Casa Provenza en Panamá Este"
+            class="w-full h-full object-cover absolute top-10 left-0"
+            loading="eager"
+          />
+        </div>
+        
+        <!-- Logo y nombre del proyecto en caja blanca superpuesto -->
+        <div class="absolute top-0 left-0 right-0 flex justify-center">
+          <div class="bg-white p-4 rounded-xl shadow-lg w-[240px] md:w-[280px] text-center">
+            <div class="flex justify-center mb-2">
+              <img 
+                src={logoUrl} 
+                alt="Logo Provenza" 
+                class="w-auto h-16 md:h-20" 
+                loading="eager"
+              />
+            </div>
+            <p class="text-gray-600 text-sm">Panamá Este</p>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+    
+    <!-- Separador naranja -->
+    <div class="w-full flex justify-center my-8">
+      <div class="w-24 h-1 bg-[var(--primary)]"></div>
+    </div>
+    
+    <!-- Sección 2: Tarjeta de características -->
+    <section class="w-full px-4 max-w-3xl mx-auto mb-12 lg:max-w-4xl">
+      <div class="bg-white rounded-xl p-6 shadow-lg">
+        <!-- Separador naranja dentro de la tarjeta antes de las características -->
+        <div class="w-full flex justify-start mb-5">
+          <div class="w-32 h-1 bg-[var(--primary)]"></div>
+        </div>
+        
+        <!-- Grid responsive para las columnas de características -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 max-w-xl mx-auto md:text-base">
+          <!-- Columna izquierda -->
+          <div>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <span class="text-[var(--primary)] font-bold mr-2 text-xl">•</span>
+                <span class="leading-tight">102m² de construcción</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--primary)] font-bold mr-2 text-xl">•</span>
+                <span class="leading-tight">lote de 200m² (10m x 20m)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--primary)] font-bold mr-2 text-xl">•</span>
+                <span class="leading-tight">3 recámaras</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--primary)] font-bold mr-2 text-xl">•</span>
+                <span class="leading-tight">2 baños</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--primary)] font-bold mr-2 text-xl">•</span>
+                <span class="leading-tight">Cocina abierta</span>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Columna derecha -->
+          <div>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <span class="text-[var(--primary)] font-bold mr-2 text-xl">•</span>
+                <span class="leading-tight">lavandería techada</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--primary)] font-bold mr-2 text-xl">•</span>
+                <span class="leading-tight">2 estacionamientos semi-techados</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--primary)] font-bold mr-2 text-xl">•</span>
+                <span class="leading-tight">terraza techada</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--primary)] font-bold mr-2 text-xl">•</span>
+                <span class="leading-tight">amplio patio</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-[var(--primary)] font-bold mr-2 text-xl">•</span>
+                <span class="leading-tight">acceso al patio desde sala y recámara principal</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Precio destacado -->
+        <div class="text-center mt-10">
+          <p class="text-sm font-bold text-gray-600 mb-1">precio de introducción</p>
+          <p class="text-[var(--primary)] text-4xl md:text-5xl font-bold">
+            $100,000
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Sección 3: Plano de la casa -->
+    <section class="w-full px-4 max-w-3xl mx-auto mb-16 lg:max-w-4xl">
+      <!-- Etiquetas de dimensiones -->
+      <div class="flex justify-between text-xs text-gray-600 mb-1 px-1">
+        <p>56.7m² de patio</p>
+        <p>200m² de terreno</p>
+      </div>
+      
+      <!-- Plano con bordes redondeados usando el componente MapModal -->
+      <div class="bg-white rounded-lg overflow-hidden shadow-md">
+        <MapModal mapImage={floorplanImageUrl} client:load />
+      </div>
+      
+      <!-- Etiqueta de proyección de techo -->
+      <div class="flex justify-end mt-1">
+        <p class="text-xs text-gray-600">proyección de techo</p>
+      </div>
+    </section>
+  </main>
+  
+  <!-- No script needed as MapModal handles all modal functionality -->
+  
+  <!-- Footer -->
+  <SocialFooter />
+</Layout>

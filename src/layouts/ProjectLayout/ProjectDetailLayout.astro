@@ -1,0 +1,314 @@
+---
+import Layout from '../Layout.astro';
+import HeaderAstro from '../../components/HeaderAstro.astro';
+import GcsImage from '../../components/GcsImage.astro';
+import ImageCarousel from '../../components/ImageCarousel.tsx';
+import GcsVideo from '../../components/GcsVideo.astro';
+import MapModal from '../../components/MapModal.tsx';
+import ChatWrapper from '../../components/ChatWrapper.astro';
+import BrochureDownloader from '../../components/BrochureDownloader';
+
+// Función para determinar la ubicación del proyecto (Este, Oeste, Centro)
+function getProjectLocation(projectId: string): string {
+  // Mapa de ubicaciones por proyecto
+  const locationMap: Record<string, string> = {
+    // Proyectos del Este
+    'amitie': 'Este',
+    'filia': 'Este',
+    'lagun': 'Este',
+    
+    // Proyectos del Oeste
+    'verona': 'Oeste',
+    'siena': 'Oeste',
+    'piamonte': 'Oeste',
+    
+    // Proyectos del Centro
+    'athas': 'Centro',
+    'gaudi': 'Centro',
+    'alai': 'Centro'
+  };
+  
+  // Devolver la ubicación correspondiente o 'Centro' como valor predeterminado
+  return locationMap[projectId] || 'Centro';
+}
+
+export interface Props {
+  project: {
+    id: string;
+    name: string;
+    logo2: string;
+    propertyType: string;
+    location: string;
+    slogan: string;
+    address: string;
+    description: string;
+    size: string;
+    bedrooms: string;
+    bathrooms: string;
+    price: string;
+    coverImage: string;
+    brochureFile: string;
+    buttonText: string;
+    features: {
+      icon: string;
+      text: string;
+    }[];
+    gallery: string[];
+    videoFile: string;
+    videoThumbnail: string;
+    mapImage: string;
+    mapsUrl: string;
+    pipedriveFormUrl: string;
+  };
+}
+
+const { project } = Astro.props;
+
+// Determinar la URL del brochure usando GCS
+const brochurePath = project.brochureFile.startsWith('http') 
+  ? project.brochureFile 
+  : `https://storage.googleapis.com/hauspanama/Brochures/${project.brochureFile}`;
+
+// Determinar la ruta del video
+// Ya no necesitamos esta variable con GcsVideo
+// const videoPath = `/assets/VIDEOS/${project.videoFile}`;
+---
+
+<Layout title={`${project.name} | Haus Panama`}>
+  <HeaderAstro />
+  
+  <!-- Pipedrive LeadBooster Chat -->
+  <ChatWrapper />
+  <main class="font-helvetica w-full min-h-screen -mt-[7px] relative overflow-hidden">
+    <!-- Hero section con imagen de fondo y logo del proyecto -->
+    <div class="relative w-full h-[40vh] md:h-[50vh] xl:h-[60vh] overflow-hidden">
+      <img 
+        src={`https://storage.googleapis.com/hauspanama/Proyectos/${getProjectLocation(project.id)}/${project.id.charAt(0).toUpperCase() + project.id.slice(1)}/${project.coverImage}`} 
+        alt={project.name}
+        class="w-full h-full object-cover object-bottom blur-[1px]"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center">
+        <div class="flex flex-col items-center gap-6 md:gap-8">
+          <div class="relative">
+            <img 
+              src={`https://storage.googleapis.com/hauspanama/Portadas/${project.logo2}`} 
+              alt={project.name}
+              class="w-full max-w-[350px] md:max-w-[500px] xl:max-w-[650px] aos-init aos-animate transition-all duration-500"
+              loading="lazy"
+            />  
+            <p class="text-white text-sm md:text-lg xl:text-2xl absolute -bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap z-10 px-2 pt-24 rounded">{project.address}</p>
+          </div>
+          
+          <BrochureDownloader
+            client:load
+            brochureFile={project.brochureFile}
+            projectName={project.name}
+            buttonText={project.buttonText}
+            projectLocation={getProjectLocation(project.id)}
+            projectId={project.id}
+            className="bg-[var(--primary)] text-white rounded-full px-6 py-3 md:px-8 md:py-4 text-sm md:text-base xl:text-lg font-medium transition-all hover:text-[var(--primary)] hover:bg-[var(--background)]/90 transform hover:scale-105 mt-2"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <!-- Shadow de transición sutil -->
+    <div class="h-2 w-full relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/80 to-transparent shadow-[0_-4px_8px_rgba(0,0,0,0.2)]"></div>
+    </div>
+    
+    <!-- Contenido principal -->
+    <div class="w-full bg-white">
+      <!-- Sección con padding para título y descripción -->
+      <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-8 md:py-12 xl:py-16">
+        <!-- Separador horizontal antes del título -->
+        <div class="h-1 w-1/2 bg-[var(--background)] max-w-xs mx-auto my-4"></div>
+        
+        <!-- Título y descripción -->
+        <div class="mb-8 md:mb-12">
+          <h1 class="text-gray-800 text-3xl md:text-4xl xl:text-5xl font-bold mb-6 mt-8 text-center">
+            {project.slogan}
+          </h1>
+          <p class="text-gray-600 text-sm md:text-lg xl:text-xl leading-relaxed text-center max-w-3xl mx-auto">
+            {project.description}
+          </p>
+        </div>
+      </div>
+      
+      <!-- Galería de imágenes / Carousel -->
+      <div class="w-full overflow-hidden py-2 md:py-4 bg-[var(--background)]/10">  
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12">
+          <ImageCarousel client:visible images={project.gallery} projectId={project.id} projectLocation={getProjectLocation(project.id)} />
+        </div>
+      </div>
+      
+      <!-- Volvemos al contenido con padding -->
+      <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12 py-8 md:py-12 xl:py-16">
+        <!-- Apartamentos - Información de tamaño y recámaras -->
+        <div class="mb-6 md:mb-8">
+          <h2 class="text-gray-800 text-2xl md:text-3xl xl:text-4xl text-center font-bold mb-4">
+            {project.id === 'piamonte' ? (
+              <>Casas de 3 y 4 recámaras con terrenos desde 160m² y 167m² de construcción.</>
+            ) : project.id === 'siena' ? (
+              <>Casas de 3 recámaras con terrenos desde 180m² y 121m² de construcción</>
+            ) : project.id === 'verona' ? (
+              <>Casas de 2 y 3 recámaras con terrenos desde 160m² y 75m² de construcción</>
+            ) : (
+              <>{project.propertyType} {project.bedrooms} recámaras desde {project.size}m²</>
+            )}
+          </h2>
+        </div>
+        
+        <!-- Separador horizontal después de la información de apartamentos -->
+        <div class="h-1 w-1/2 bg-[var(--background)] max-w-xs mx-auto my-6"></div>
+        
+        <!-- Contenedor flex para video y características en desktop -->
+        <div class="flex flex-col lg:flex-row lg:items-stretch lg:justify-between gap-8 lg:gap-12 xl:gap-16 mb-12">
+          <!-- Características del proyecto -->
+          <div class="bg-white rounded-xl shadow-lg border border-gray-100/60 p-6 md:p-8 lg:p-10 lg:w-1/2 transition-all duration-300 hover:shadow-xl">
+          <h2 class="text-[var(--primary)] text-center text-2xl md:text-3xl xl:text-4xl font-bold mb-2 md:mb-4">
+            amenidades del proyecto
+          </h2>
+          
+          <!-- Separador horizontal después del título de características -->
+          <div class="h-1 w-1/2 bg-[var(--background)] max-w-xs md:max-w-sm mx-auto my-4 md:my-6"></div>
+          
+          <ul class="grid grid-cols-3 gap-2 xs:gap-3 md:gap-5 text-center">
+            {project.features.map((feature, index) => (
+              <li class="text-gray-700 text-[10px] sm:text-xs md:text-sm font-medium transition-all duration-300 hover:text-[var(--primary)] hover:font-bold hover:scale-[1.05] cursor-default py-1 md:py-2 px-1 flex flex-col items-center justify-center">
+                <img 
+                  src={`https://storage.googleapis.com/hauspanama/Icons/${feature.icon}`} 
+                  alt={`Icono de ${feature.text}`}
+                  class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mb-1 sm:mb-2"
+                  loading="lazy"
+                />
+                <span class="leading-tight">{feature.text}</span>
+              </li>
+            ))}
+          </ul>
+          </div>
+          
+          <!-- Video del proyecto -->
+          <div class="lg:w-1/2 flex items-center">
+            <div class="w-full h-full rounded-xl overflow-hidden shadow-lg">
+              <GcsVideo 
+                videoId={`Videos/${project.videoFile}`} 
+                thumbnailPath={`Proyectos/${getProjectLocation(project.id)}/${project.id.charAt(0).toUpperCase() + project.id.slice(1)}/${project.videoThumbnail || project.coverImage}`}
+                altText="Video del proyecto"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Separador horizontal después del video -->
+      <div class="h-1 w-1/2 bg-[var(--background)] max-w-xs mx-auto my-6"></div>
+      
+      <!-- Mapa de ubicación -->
+      <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12 mb-6">
+        <!-- Componente de modal para el mapa -->
+        <MapModal client:visible mapImage={project.mapImage} mapsUrl={project.mapsUrl} projectName={project.name} />
+        
+        <!-- Botón de ubicación con Google Maps -->
+        <div class="flex justify-center mt-4">
+          <a 
+            href={project.mapsUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="flex items-center justify-center gap-2 px-6 py-3 bg-[var(--primary)] hover:bg-[#ff7d00] text-white rounded-full transition-all duration-300 shadow-md hover:shadow-lg"
+          >
+            <img 
+              src="https://storage.googleapis.com/hauspanama/Icons/location.svg" 
+              alt="Icono de ubicación" 
+              class="w-5 h-5 mr-1"
+              loading="lazy"
+            />
+            <span class="font-medium">ubicación</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Separador horizontal después del mapa de ubicación -->
+      <div class="h-1 w-1/2 bg-[var(--background)] max-w-xs mx-auto my-6"></div>
+      <!-- Sección de formulario de contacto -->
+      <div class="container mx-auto max-w-2xl lg:max-w-3xl px-4 sm:px-6 lg:px-8 mb-16 lg:mb-12">
+      <!-- Formulario de contacto de Pipedrive -->
+      <div class="rounded-xl shadow-xl bg-white transition-all duration-300 hover:shadow-2xl">
+        
+        <div class="rounded-xl border border-[var(--background)] px-4 py-6 md:px-6 md:py-8 lg:px-4 lg:py-4 xl:px-4 xl:py-4">
+          <style is:inline>
+            /* Reducir el espacio en el formulario Pipedrive */
+            .pipedriveWebForms .ppf__button {
+              margin-bottom: 0 !important;
+            }
+            .pipedriveWebForms form > div:last-child {
+              margin-bottom: 0 !important;
+            }
+            
+            /* Estilos específicos para desktop */
+            @media (min-width: 1024px) {
+              .pipedriveWebForms .ppf__form {
+                padding: 0 !important;
+                margin: 0 !important;
+              }
+              .pipedriveWebForms .ppf__field {
+                margin-bottom: 12px !important;
+              }
+            }
+          </style>
+          <h2 class="text-[var(--primary)] text-2xl md:text-3xl xl:text-4xl font-bold text-center mt-6 lg:mt-2 lg:mb-2">
+            ¡Gracias por tu interés en nuestro proyecto!
+          </h2>
+          <p class="text-center text-xs md:text-base xl:text-lg text-gray-600 mt-4 mb-6 lg:mt-2 lg:mb-2 max-w-xl mx-auto">
+            Por favor brindanos tus datos para poder contactarte y enviarte
+            información más detallada del proyecto.
+          </p>
+          <div
+            class="pipedriveWebForms max-w-md md:max-w-full mx-auto"
+            data-pd-webforms={project.pipedriveFormUrl}
+            id={`form-${project.id}`}
+          >
+            <script src="https://webforms.pipedrive.com/f/loader"></script>
+            <iframe
+              src={`${project.pipedriveFormUrl}?embeded=1&uuid=form-${project.id}`}
+              name={`hauspanama-${project.id}`}
+              title="Web Forms"
+              style="width: 100%; border: none; height: 650px; margin: 0 auto; border-radius: 0.5rem;"
+              class="mx-auto block lg:-mt-1"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer adaptado para el detalle de proyecto -->
+    <footer class="bg-white py-8 md:py-10 xl:py-12 px-4 md:px-6 border-t border-gray-100">
+      <div class="container mx-auto max-w-7xl flex flex-col items-center">
+        <!-- Social Icons -->
+        <div class="flex items-center gap-2 md:gap-4 mb-4 md:mb-6 justify-center">
+        <!-- Facebook -->
+    <a href="https://www.facebook.com/HausPanamaOficial" target="_blank" rel="noopener noreferrer" aria-label="Facebook Haus Panama" class="block transition-transform hover:scale-110">
+      <GcsImage publicId="Icons/facebook.svg" alt="Facebook" width={35} height={35} className="w-8 h-8 md:w-10 md:h-10" />
+    </a>
+    
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@hauspanama5505" target="_blank" rel="noopener noreferrer" aria-label="YouTube Haus Panama" class="block transition-transform hover:scale-110">
+      <GcsImage publicId="Icons/youtube.svg" alt="YouTube" width={35} height={35} className="w-8 h-8 md:w-10 md:h-10" />
+    </a>
+    
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/hauspanama/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Haus Panama" class="block transition-transform hover:scale-110">
+      <GcsImage publicId="Icons/instagram.svg" alt="Instagram" width={35} height={35} className="w-8 h-8 md:w-10 md:h-10" />
+    </a>
+        </div>
+        <div class="mb-4 md:mb-6">
+          <p class="text-xs md:text-sm text-gray-500 font-helvetica text-center">una empresa de</p>
+          <GcsImage publicId="Logos/semahLogo_lh5hyz.png" alt="Semah" className="h-6 md:h-8" />
+        </div>
+        
+      </div>
+    </footer>
+  </main>
+</Layout>

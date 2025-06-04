@@ -1,0 +1,171 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./fonts.css";
+
+@layer base {
+  :root {
+    --primary: #ee7a23;
+    --secondary: #444444;
+    --background: #e6e7e8;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  html {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  body {
+    padding-top: 60px;
+    background-color: var(--background);
+    color: var(--secondary);
+    overflow-x: hidden; /* Prevenir scroll horizontal */
+  }
+
+  /* Asegurar que las imágenes no causen overflow */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Contenedor principal con ancho máximo para evitar estiramientos excesivos en pantallas grandes */
+  .max-container {
+    width: 100%;
+    max-width: 1920px; /* Ancho máximo para el contenido */
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+
+  /* Hack para soportar hover en dispositivos táctiles */
+  @media (hover: hover) {
+    .hover-color:hover {
+      color: var(--primary) !important;
+    }
+    
+    .hover-translate:hover {
+      transform: translateX(0.375rem) !important;
+    }
+    
+    .hover-scale:hover {
+      transform: scale(1.1) !important;
+    }
+    
+    .hover-opacity:hover {
+      opacity: 0.9 !important;
+    }
+    
+    .hover-rotate:hover {
+      transform: rotate(90deg) !important;
+    }
+    
+    .hover-bg:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+  
+  /* Efectos para dispositivos táctiles */
+  @media (hover: none) {
+    .hover-color:active {
+      color: var(--primary) !important;
+      transition: color 0.3s ease !important;
+    }
+    
+    .hover-translate:active {
+      transform: translateX(0.375rem) !important;
+      transition: transform 0.3s ease !important;
+    }
+    
+    .hover-scale:active {
+      transform: scale(1.1) !important;
+      transition: transform 0.3s ease !important;
+    }
+    
+    .hover-opacity:active {
+      opacity: 0.9 !important;
+      transition: opacity 0.3s ease !important;
+    }
+    
+    .hover-rotate:active {
+      transform: rotate(90deg) !important;
+      transition: transform 0.3s ease !important;
+    }
+    
+    .hover-bg:active {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      transition: background-color 0.3s ease !important;
+    }
+  }
+}
+
+/* Estilos para las tarjetas de propiedades */
+
+/* Estilos específicos para las tarjetas de propiedades */
+a[href^="/brisas"],
+a[href^="/casas-y"],
+a[href^="/centro"],
+a[href^="/casas-este"] {
+  display: block;
+  transform: translateZ(0); /* Forzar aceleración por hardware */
+  will-change: transform; /* Optimizar para animaciones */
+  backface-visibility: hidden; /* Mejora rendimiento en móviles */
+  perspective: 1000px; /* Optimización adicional para dispositivos móviles */
+}
+
+/* Implementación de efectos hover para dispositivos táctiles */
+.property-card {
+  transition: all 0.3s ease !important;
+}
+
+/* Aplicar efectos en dispositivos táctiles después de tocar */
+@media (hover: none) {
+  .property-card:active .property-card-image {
+    filter: brightness(0.9) !important;
+    transition: filter 0.3s ease;
+  }
+  
+  .property-card:active .property-card-overlay {
+    background-color: rgba(0, 0, 0, 0) !important;
+    transition: background-color 0.3s ease;
+  }
+  
+  .property-card:active .property-card-title {
+    color: white !important;
+    transition: color 0.3s ease;
+  }
+  
+  .property-card:active .ver-mas-btn {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    transition: all 0.3s ease;
+  }
+}
+
+/* Optimizaciones globales para animaciones */
+.transition-all,
+.transition-colors,
+.transition-transform {
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  transform: translateZ(0);
+}
+
+/* Estado activo para elementos táctiles */
+@media (hover: none) {
+  a:active, button:active {
+    transition-duration: 0.3s !important;
+  }
+}
+
+/* Optimizar menús y elementos de navegación */
+header,
+[class*="menu"],
+[class*="nav"] {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevenir problemas de overflow en contenedores */
+.overflow-hidden {
+  overflow: hidden !important;
+}

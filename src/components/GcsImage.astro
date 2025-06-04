@@ -1,0 +1,53 @@
+---
+/**
+ * GcsImage.astro
+ * Componente para mostrar imágenes desde Google Cloud Storage usando IDs
+ */
+
+import type { GcsImageProps } from '../types/Component';
+
+interface Props extends GcsImageProps {
+  publicId: string;   // El ID o ruta de la imagen en Google Cloud Storage
+  alt: string;
+  className?: string;
+  width?: number;
+  height?: number;
+  loading?: 'eager' | 'lazy';
+  sizes?: string;
+  fetchPriority?: 'high' | 'low' | 'auto';
+}
+
+const { 
+  publicId, 
+  alt, 
+  className = "", 
+  width, 
+  height, 
+  loading = "lazy",
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  fetchPriority = "auto"
+} = Astro.props;
+
+// Detectar si es un SVG para consideraciones especiales si fuera necesario
+const isSvg = publicId.toLowerCase().endsWith('.svg');
+
+// Construir la URL directamente
+let imageUrl = publicId;
+if (!publicId.startsWith('http')) {
+  const bucketName = 'hauspanama';
+  imageUrl = `https://storage.googleapis.com/${bucketName}/${publicId}`;
+  console.log(`GcsImage generando URL: ${imageUrl} para publicId: ${publicId}`);
+}
+---
+
+<img 
+  src={imageUrl} 
+  alt={alt} 
+  class={className}
+  width={width} 
+  height={height} 
+  loading={loading}
+  decoding="async"
+  fetchpriority={fetchPriority}
+  sizes={sizes}
+/>

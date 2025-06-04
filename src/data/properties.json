@@ -1,0 +1,208 @@
+{
+  "categories": [
+    {
+      "id": "brisas-y-tocumen",
+      "title": "apartamentos en brisas y tocumen",
+      "properties": [
+        {
+          "id": "brisas-1",
+          "title": "apartamentos en",
+          "title2": "brisas y tocumen",
+          "subtitle": "desde $100k hasta $120k",
+          "image": "Logo_Amitie_fpf9so.svg",
+          "link": "/property-details/brisas-1"
+        },
+        {
+          "id": "brisas-2",
+          "title": "apartamentos en",
+          "title2": "brisas y tocumen",
+          "subtitle": "desde $95k hasta $115k",
+          "image": "Logo_Filia_t7piju.svg",
+          "link": "/property-details/brisas-2"
+        },
+        {
+          "id": "brisas-3",
+          "title": "apartamentos en",
+          "title2": "brisas y tocumen",
+          "subtitle": "desde $90k hasta $110k",
+          "image": "Logo_Lagun_eykfsg.svg",
+          "link": "/property-details/brisas-3"
+        }
+      ]
+    },
+    {
+      "id": "casas-y-aptos-oeste",
+      "title": "casas en panamá oeste",
+      "properties": [
+        {
+          "id": "oeste-2",
+          "title": "casas en",
+          "title2": "panamá oeste",
+          "subtitle": "desde $92k hasta $105k",
+          "image": "Logo_Siena_s0jeke.svg",
+          "link": "/property-details/oeste-2"
+        },
+        {
+          "id": "oeste-1",
+          "title": "casas en",
+          "title2": "panamá oeste",
+          "subtitle": "desde $95k hasta $110k",
+          "image": "Logo_Piamonte_n0lsfc.svg",
+          "link": "/property-details/oeste-1"
+        },
+        {
+          "id": "oeste-3",
+          "title": "casas en",
+          "title2": "panamá oeste",
+          "subtitle": "desde $90k hasta $103k",
+          "image": "Logo_Verona_but4p4.svg",
+          "link": "/property-details/oeste-3"
+        }
+      ]
+    },
+    {
+      "id": "centro-ciudad",
+      "title": "apartamentos en el centro de la ciudad",
+      "properties": [
+        {
+          "id": "centro-1",
+          "title": "apartamentos en",
+          "title2": "el centro de la ciudad",
+          "subtitle": "desde $110k hasta $180k",
+          "image": "Logo_Athas_zg87vl.svg",
+          "link": "/property-details/centro-1"
+        },
+        {
+          "id": "centro-2",
+          "title": "apartamentos en",
+          "title2": "el centro de la ciudad",
+          "subtitle": "desde $115k hasta $170k",
+          "image": "Logo_Gaudi_hfvu13.svg",
+          "link": "/property-details/centro-2"
+        },
+        {
+          "id": "centro-3",
+          "title": "apartamentos en",
+          "title2": "el centro de la ciudad",
+          "subtitle": "desde $120k hasta $190k",
+          "image": "Logo_Alai_asylsy.svg",
+          "link": "/property-details/centro-3"
+        }
+      ]
+    },
+    {
+      "id": "casas-este",
+      "title": "casas en panamá este",
+      "properties": [
+        {
+          "id": "este-1",
+          "title": "casas en",
+          "title2": "panamá este",
+          "subtitle": "desde $90k hasta $110k",
+          "image": "Logo_Amitie_fpf9so.svg",
+          "link": "/property-details/este-1"
+        },
+        {
+          "id": "este-2",
+          "title": "casas en",
+          "title2": "panamá este",
+          "subtitle": "desde $85k hasta $105k",
+          "image": "Logo_Filia_t7piju.svg",
+          "link": "/property-details/este-2"
+        },
+        {
+          "id": "este-3",
+          "title": "casas en",
+          "title2": "panamá este",
+          "subtitle": "desde $80k hasta $100k",
+          "image": "Logo_Lagun_eykfsg.svg",
+          "link": "/property-details/este-3"
+        }
+      ]
+    },
+    {
+      "id": "apartamentos-economicos",
+      "title": "apartamentos económicos",
+      "properties": [
+        {
+          "id": "economicos-1",
+          "title": "filia",
+          "subtitle": "desde $115k hasta $145k",
+          "image": "Logo_Filia_t7piju.svg",
+          "link": "/filia"
+        },
+        {
+          "id": "economicos-2",
+          "title": "amitié",
+          "subtitle": "desde $135k hasta $160k",
+          "image": "Logo_Amitie_fpf9so.svg",
+          "link": "/amitie"
+        },
+        {
+          "id": "economicos-3",
+          "title": "lagun",
+          "subtitle": "desde $115k hasta $130k",
+          "image": "Logo_Lagun_eykfsg.svg",
+          "link": "/lagun"
+        }
+      ]
+    },
+    {
+      "id": "apartamentos-premium",
+      "title": "apartamentos premium",
+      "properties": [
+        {
+          "id": "premium-1",
+          "title": "áthas",
+          "subtitle": "desde $180k hasta $250k",
+          "image": "Logo_Athas_zg87vl.svg",
+          "link": "/athas"
+        },
+        {
+          "id": "premium-2",
+          "title": "gaudi",
+          "subtitle": "desde $190k hasta $270k",
+          "image": "Logo_Gaudi_hfvu13.svg",
+          "link": "/gaudi"
+        },
+        {
+          "id": "premium-3",
+          "title": "alai",
+          "subtitle": "desde $185k hasta $260k",
+          "image": "Logo_Alai_asylsy.svg",
+          "link": "/alai"
+        }
+      ]
+    }
+  ],
+  "featured": [
+    {
+      "id": "brisas-1",
+      "title": "apartamentos en brisas y tocumen",
+      "subtitle": "desde $100k hasta $120k",
+      "image": "/assets/CENTRO/ATHAS/Fotos Athas-02.webp",
+      "link": "/brisas-y-tocumen"
+    },
+    {
+      "id": "oeste-1",
+      "title": "casas en panamá oeste",
+      "subtitle": "desde $95k hasta $110k",
+      "image": "/assets/CENTRO/ALAI/Fotos Alai-03.webp",
+      "link": "/casas-y-aptos-oeste"
+    },
+    {
+      "id": "centro-1",
+      "title": "apartamentos en el centro de la ciudad",
+      "subtitle": "desde $110k hasta $180k",
+      "image": "/assets/CENTRO/GAUDI/Fotos Gaudi-02.webp",
+      "link": "/centro-ciudad"
+    },
+    {
+      "id": "este-1",
+      "title": "casas en panamá este",
+      "subtitle": "desde $90k hasta $110k",
+      "image": "/assets/CENTRO/ATHAS/Fotos Athas-10.webp",
+      "link": "/casas-este"
+    }
+  ]
+}

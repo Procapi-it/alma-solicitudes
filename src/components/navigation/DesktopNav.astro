@@ -1,0 +1,19 @@
+---
+import ProjectsDropdown from './ProjectsDropdown.astro';
+---
+
+<nav class="hidden xl:flex items-center space-x-6 w-full justify-center">
+  <a href="/" class="font-helvetica font-medium px-2.5 py-1.5 text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)] hover:scale-105">
+    inicio
+  </a>
+  
+  <a href="/about" class="font-helvetica font-medium px-2.5 py-1.5 text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)] hover:scale-105">
+    sobre nosotros
+  </a>
+  
+  <ProjectsDropdown />
+  
+  <a href="/contacto" class="font-helvetica font-medium px-2.5 py-1.5 text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)] hover:scale-105">
+    contáctenos
+  </a>
+</nav>

@@ -1,0 +1,70 @@
+---
+import GcsImage from './GcsImage.astro';
+---
+
+<footer class="w-full bg-transparent">
+  <div class="mx-auto px-2 sm:px-6 md:px-8 lg:px-10 flex items-center justify-between">
+    <!-- Logo Semah - Siempre a la izquierda -->
+    <div class="flex-shrink-0 flex-grow-0">
+      <div class="flex flex-col items-start">
+        <p class="text-[10px] sm:text-xs text-gray-500 font-helvetica">una empresa de</p>
+        <div class="mt-0 sm:mt-1">
+          <a href="https://semah.com" target="_blank" rel="noopener noreferrer" aria-label="Ir a la página web de Semah Group">
+            <GcsImage 
+              publicId="Logos/semahLogo_lh5hyz.png" 
+              alt="Semah" 
+              className="h-4 sm:h-6 md:h-7 transition-transform hover:scale-105" 
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Redes sociales y Términos Legales - Todo centrado en versión móvil -->
+    <div class="flex flex-col items-center flex-grow justify-center sm:justify-center">
+      <!-- Iconos de redes sociales - Arriba -->
+      <div class="flex items-center gap-2 sm:gap-4 md:gap-2 justify-center">
+        <a 
+          href="https://www.facebook.com/HausPanamaOficial" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          aria-label="Facebook Haus Panama" 
+          class="block transition-transform hover:scale-110 active:scale-95"
+        >
+          <GcsImage 
+            publicId="Icons/facebook.svg" 
+            alt="Facebook" 
+            className="w-6 h-6 sm:w-6 sm:h-6 md:w-7 md:h-7" 
+          />
+        </a>
+        
+        <a 
+          href="https://www.youtube.com/@hauspanama5505" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          aria-label="YouTube Haus Panama" 
+          class="block transition-transform hover:scale-110 active:scale-95"
+        >
+          <GcsImage 
+            publicId="Icons/youtube.svg" 
+            alt="YouTube" 
+            className="w-6 h-6 sm:w-6 sm:h-6 md:w-7 md:h-7" 
+          />
+        </a>
+        <a 
+          href="https://www.instagram.com/hauspanama/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          aria-label="Instagram Haus Panama" 
+          class="block transition-transform hover:scale-110 active:scale-95"
+        >
+          <GcsImage 
+            publicId="Icons/instagram.svg" 
+            alt="Instagram" 
+            className="w-6 h-6 sm:w-6 sm:h-6 md:w-7 md:h-7" 
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

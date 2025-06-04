@@ -1,0 +1,156 @@
+---
+/**
+ * Componente para generar datos estructurados (Schema.org) para mejorar el SEO
+ * Acepta diferentes tipos de esquemas basados en el tipo de página
+ */
+
+interface Props {
+  /**
+   * Tipo de esquema a generar (RealEstateListing, Organization, etc.)
+   */
+  type: 'RealEstateListing' | 'RealEstateProject' | 'Organization' | 'WebSite' | 'FAQPage';
+  
+  /**
+   * Datos específicos para el esquema seleccionado
+   */
+  data: Record<string, any>;
+}
+
+const { type, data } = Astro.props;
+
+// Definir el objeto de esquema base
+let schema: Record<string, any> = {
+  '@context': 'https://schema.org',
+};
+
+// Generar esquema según el tipo
+switch (type) {
+  case 'RealEstateProject':
+    schema = {
+      ...schema,
+      '@type': 'Product',
+      name: data.name,
+      description: data.description,
+      image: data.images?.[0] || data.coverImage,
+      offers: {
+        '@type': 'Offer',
+        price: data.price?.replace(/[^\d.]/g, '') || '',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+      brand: {
+        '@type': 'Brand',
+        name: 'Haus Panama',
+      },
+      category: 'Inmobiliaria/Proyectos',
+      amenityFeature: data.features?.map((feature: any) => ({
+        '@type': 'LocationFeatureSpecification',
+        name: feature.text,
+        value: true,
+      })) || [],
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'Panamá',
+        addressRegion: data.location || 'Ciudad de Panamá',
+      },
+    };
+    break;
+    
+  case 'RealEstateListing':
+    schema = {
+      ...schema,
+      '@type': 'RealEstateListing',
+      name: data.name,
+      description: data.description,
+      image: data.images?.[0] || data.coverImage,
+      url: new URL(Astro.url.pathname, Astro.site).toString(),
+      offers: {
+        '@type': 'Offer',
+        price: data.price?.replace(/[^\d.]/g, '') || '',
+        priceCurrency: 'USD',
+      },
+      geo: data.geo ? {
+        '@type': 'GeoCoordinates',
+        latitude: data.geo.latitude,
+        longitude: data.geo.longitude,
+      } : undefined,
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'Panamá',
+        addressRegion: data.location || 'Ciudad de Panamá',
+      },
+    };
+    break;
+    
+  case 'Organization':
+    schema = {
+      ...schema,
+      '@type': 'Organization',
+      name: data.name || 'Haus Panama',
+      logo: data.logo || 'https://storage.googleapis.com/hauspanama/Portadas/logohaus.svg',
+      url: new URL('/', Astro.site).toString(),
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: data.phone || '+507 6380-5659',
+        contactType: 'customer service',
+        availableLanguage: ['Spanish', 'English'],
+      },
+      sameAs: [
+        'https://www.instagram.com/hauspanama/',
+        'https://www.facebook.com/profile.php?id=61554486686761',
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'Panamá',
+        addressRegion: 'Ciudad de Panamá',
+      },
+    };
+    break;
+    
+  case 'WebSite':
+    schema = {
+      ...schema,
+      '@type': 'WebSite',
+      name: data.name || 'Haus Panama',
+      url: new URL('/', Astro.site).toString(),
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${new URL('/', Astro.site).toString()}search?q={search_term_string}`,
+        },
+        'query-input': 'required name=search_term_string',
+      },
+    };
+    break;
+    
+  case 'FAQPage':
+    schema = {
+      ...schema,
+      '@type': 'FAQPage',
+      mainEntity: data.questions?.map((item: any) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })) || [],
+    };
+    break;
+    
+  default:
+    // Caso predeterminado si el tipo no es reconocido
+    schema = {
+      ...schema,
+      '@type': 'Thing',
+      name: data.name || 'Haus Panama',
+      description: data.description || 'Propiedades exclusivas en la ciudad de Panamá',
+    };
+}
+
+// Convertir a JSON
+const jsonLD = JSON.stringify(schema);
+---
+
+<script type="application/ld+json" set:html={jsonLD}></script>

@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeaderAstro from '../components/HeaderAstro.astro';
+import SocialFooter from '../components/SocialFooter.astro';
+---
+
+<Layout title="Términos Legales | Haus Panama">
+  <HeaderAstro />
+  
+  <main class="font-helvetica relative w-full min-h-[calc(100vh-60px)] pt-6">
+    <div class="absolute inset-0 z-0">
+      <img src="/assets/webbackground.webp" alt="" class="w-full h-full object-cover opacity-10" />
+    </div>
+    
+    <div class="relative z-10 container mx-auto px-4 md:px-6 max-w-4xl">
+      <h1 class="text-3xl md:text-4xl font-bold text-[var(--secondary)] mb-8 text-center">Términos Legales y Derechos de Autor</h1>
+      
+      <div class="bg-white bg-opacity-90 rounded-xl p-6 md:p-8 shadow-sm">
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-[var(--primary)] mb-4">Propiedad Intelectual</h2>
+          <p class="mb-4">Todo el contenido presente en el sitio web de Haus Panama, incluyendo pero no limitado a textos, gráficos, logotipos, íconos, imágenes, clips de audio, descargas digitales, compilaciones de datos y software, es propiedad de SEMAH Group, Inc. o de sus proveedores de contenido y está protegido por las leyes panameñas e internacionales de propiedad intelectual.</p>
+          <p>Queda estrictamente prohibida la reproducción, distribución, modificación, publicación, transmisión, uso, explotación o disposición total o parcial del contenido de este sitio sin la autorización previa y por escrito de SEMAH Group, Inc.</p>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-[var(--primary)] mb-4">Uso de Materiales</h2>
+          <p class="mb-4">Las fotografías, planos, vídeos, renders y toda representación visual de los proyectos inmobiliarios presentados en este sitio web son de carácter ilustrativo. Su finalidad es meramente informativa y no constituyen una oferta vinculante ni garantía contractual.</p>
+          <p>Ninguna imagen, logotipo o material gráfico puede ser utilizado en otros sitios web, redes sociales o medios impresos sin la autorización expresa de SEMAH Group, Inc.</p>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-[var(--primary)] mb-4">Limitación de Responsabilidad</h2>
+          <p class="mb-4">La información contenida en este sitio web se proporciona "tal cual" sin garantía de ningún tipo, ya sea expresa o implícita. SEMAH Group, Inc. no garantiza la exactitud, integridad o actualidad de la información proporcionada.</p>
+          <p>Las especificaciones, precios y disponibilidad de los inmuebles pueden variar en cualquier momento y sin previo aviso. Para información actualizada, comuníquese directamente con nuestro equipo de ventas.</p>
+        </section>
+        
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-[var(--primary)] mb-4">Política de Privacidad</h2>
+          <p class="mb-4">Al proporcionar información personal a través de este sitio web, usted acepta que dicha información sea utilizada para fines de contacto, mercadeo y seguimiento comercial relacionados con nuestros proyectos inmobiliarios.</p>
+          <p>SEMAH Group, Inc. se compromete a proteger la confidencialidad de su información personal y a cumplir con todas las leyes aplicables de protección de datos.</p>
+        </section>
+        
+        <section>
+          <h2 class="text-2xl font-semibold text-[var(--primary)] mb-4">Contacto Legal</h2>
+          <p>Si tiene alguna pregunta sobre estos términos legales o cree que algún contenido viola sus derechos de propiedad intelectual, contáctenos a través de los canales oficiales disponibles en este sitio web.</p>
+        </section>
+        
+        <div class="mt-10 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
+          © {new Date().getFullYear()} SEMAH Group, Inc. Todos los derechos reservados.
+        </div>
+      </div>
+    </div>
+    
+    <div class="mt-8">
+      <SocialFooter />
+    </div>
+  </main>
+</Layout>

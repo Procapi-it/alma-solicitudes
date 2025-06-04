@@ -1,0 +1,228 @@
+---
+// Proyectos organizados por zona
+const projectsByZone = {
+  centro: [
+    { name: "áthas", path: "/athas" },
+    { name: "gaudí", path: "/gaudi" },
+    { name: "alai", path: "/alai" }
+  ],
+  este: [
+    { name: "amitié", path: "/amitie" },
+    { name: "lagun", path: "/lagun" },
+    { name: "filia", path: "/filia" },
+    { name: "provenza", path: "/casas-este" }
+  ],
+  oeste: [
+    { name: "verona", path: "/verona" },
+    { name: "piamonte", path: "/piamonte" },
+    { name: "siena", path: "/siena" }
+  ]
+};
+---
+
+<div class="dropdown-container relative">
+  <!-- Botón principal -->
+  <button 
+    class="main-toggle flex items-center space-x-1 font-helvetica font-medium px-2.5 py-1.5 text-[var(--secondary)] transition-all duration-300 hover:text-[var(--primary)] hover:scale-105"
+  >
+    <span>proyectos</span>
+    <svg class="main-arrow transform transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+  </button>
+  
+  <!-- Menú principal -->
+  <div class="main-menu absolute z-10 left-0 mt-1 w-56 rounded-md shadow-lg bg-white ring-1 ring-[var(--primary)] ring-opacity-5 hidden">
+    <div class="py-2 px-1">
+      <!-- CENTRO -->
+      <div class="zone-dropdown relative">
+        <button class="zone-toggle px-3 py-2 text-sm font-bold text-gray-900 cursor-pointer flex items-center justify-between w-full transition-all duration-300 hover:text-[var(--primary)]" data-zone="centro">
+          <span>Centro</span>
+          <svg class="zone-arrow transform transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="zone-menu pl-2 hidden" data-zone="centro">
+          {projectsByZone.centro.map(project => (
+            <a 
+              href={project.path} 
+              class="block px-4 py-2 text-sm text-gray-700 transition-all duration-300 hover:text-[var(--primary)] hover:scale-120 transform origin-left"
+            >
+              {project.name}
+            </a>
+          ))}
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-100 my-1"></div>
+      
+      <!-- ESTE -->
+      <div class="zone-dropdown relative">
+        <button class="zone-toggle px-3 py-2 text-sm font-bold text-gray-900 cursor-pointer flex items-center justify-between w-full transition-all duration-300 hover:text-[var(--primary)]" data-zone="este">
+          <span>Este</span>
+          <svg class="zone-arrow transform transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="zone-menu pl-2 hidden" data-zone="este">
+          {projectsByZone.este.map(project => (
+            <a 
+              href={project.path} 
+              class="block px-4 py-2 text-sm text-gray-700 transition-all duration-300 hover:text-[var(--primary)] hover:scale-120 transform origin-left"
+            >
+              {project.name}
+            </a>
+          ))}
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-100 my-1"></div>
+      
+      <!-- OESTE -->
+      <div class="zone-dropdown relative">
+        <button class="zone-toggle px-3 py-2 text-sm font-bold text-gray-900 cursor-pointer flex items-center justify-between w-full transition-all duration-300 hover:text-[var(--primary)]" data-zone="oeste">
+          <span>Oeste</span>
+          <svg class="zone-arrow transform transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="zone-menu pl-2 hidden" data-zone="oeste">
+          {projectsByZone.oeste.map(project => (
+            <a 
+              href={project.path} 
+              class="block px-4 py-2 text-sm text-gray-700 transition-all duration-300 hover:text-[var(--primary)] hover:scale-120 transform origin-left"
+            >
+              {project.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Script extremadamente simple para asegurar que funcione
+  document.addEventListener('DOMContentLoaded', () => {
+    // Seleccionar elementos por clase en lugar de ID para evitar problemas
+    const mainToggle = document.querySelector('.main-toggle');
+    const mainMenu = document.querySelector('.main-menu');
+    const mainArrow = document.querySelector('.main-arrow');
+    const zoneToggles = document.querySelectorAll('.zone-toggle');
+    
+    // Verificar que los elementos existan
+    if (!mainToggle || !mainMenu || !mainArrow) {
+      console.error('No se encontraron los elementos del menú principal');
+      return;
+    }
+    
+    // Botón principal - mostrar/ocultar menú desplegable
+    mainToggle.addEventListener('click', function(event) {
+      event.preventDefault();
+      // Simplemente alternamos la clase hidden
+      const isHidden = mainMenu.classList.contains('hidden');
+      
+      if (isHidden) {
+        // Mostrar menú
+        mainMenu.classList.remove('hidden');
+        mainArrow.classList.add('rotate-180');
+      } else {
+        // Ocultar menú
+        mainMenu.classList.add('hidden');
+        mainArrow.classList.remove('rotate-180');
+        
+        // Ocultar todos los submenús también
+        document.querySelectorAll('.zone-menu').forEach(function(menu) {
+          menu.classList.add('hidden');
+        });
+        
+        document.querySelectorAll('.zone-arrow').forEach(function(arrow) {
+          arrow.classList.remove('rotate-180');
+        });
+      }
+    });
+    
+    // Botón de cada zona - mostrar/ocultar submenú
+    zoneToggles.forEach(function(toggle) {
+      toggle.addEventListener('click', function(event) {
+        // Evitar que el clic se propague y cierre el menú principal
+        event.stopPropagation();
+        event.preventDefault();
+        
+        // Obtener la zona desde el atributo data-zone
+        const zone = toggle.getAttribute('data-zone');
+        const zoneMenu = document.querySelector('.zone-menu[data-zone="' + zone + '"]');
+        const zoneArrow = toggle.querySelector('.zone-arrow');
+        
+        if (!zoneMenu || !zoneArrow) return;
+        
+        // Verificar si el menú está visible
+        const isHidden = zoneMenu.classList.contains('hidden');
+        
+        // Ocultar todos los menús primero
+        document.querySelectorAll('.zone-menu').forEach(function(menu) {
+          menu.classList.add('hidden');
+        });
+        
+        document.querySelectorAll('.zone-arrow').forEach(function(arrow) {
+          arrow.classList.remove('rotate-180');
+        });
+        
+        // Si estaba oculto, mostrarlo (si no, ya lo ocultamos arriba)
+        if (isHidden) {
+          zoneMenu.classList.remove('hidden');
+          zoneArrow.classList.add('rotate-180');
+        }
+      });
+    });
+    
+    // Cerrar todo al hacer clic fuera del menú
+    document.addEventListener('click', function(event) {
+      // Convertir el objetivo a un elemento DOM
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      
+      const dropdown = document.querySelector('.dropdown-container');
+      
+      // Si el clic fue fuera del menú
+      if (dropdown && !dropdown.contains(target)) {
+        // Ocultar menú principal
+        mainMenu.classList.add('hidden');
+        mainArrow.classList.remove('rotate-180');
+        
+        // Ocultar submenús
+        document.querySelectorAll('.zone-menu').forEach(function(menu) {
+          menu.classList.add('hidden');
+        });
+        
+        document.querySelectorAll('.zone-arrow').forEach(function(arrow) {
+          arrow.classList.remove('rotate-180');
+        });
+      }
+    });
+    
+    // Cerrar con ESC
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        // Ocultar menú principal
+        mainMenu.classList.add('hidden');
+        mainArrow.classList.remove('rotate-180');
+        
+        // Ocultar submenús
+        document.querySelectorAll('.zone-menu').forEach(function(menu) {
+          menu.classList.add('hidden');
+        });
+        
+        document.querySelectorAll('.zone-arrow').forEach(function(arrow) {
+          arrow.classList.remove('rotate-180');
+        });
+      }
+    });
+    
+    // Inicializar - asegurarnos que todo comienza oculto
+    mainMenu.classList.add('hidden');
+    document.querySelectorAll('.zone-menu').forEach(function(menu) {
+      menu.classList.add('hidden');
+    });
+  });
+</script>

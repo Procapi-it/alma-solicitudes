@@ -1,0 +1,25 @@
+---
+export interface Props {
+  formUrl: string;
+}
+
+const { formUrl } = Astro.props;
+const randomId = `pd-form-${Math.random().toString(36).substring(2, 11)}`;
+---
+
+<div class="w-full mb-8">
+  <div 
+    class="pipedriveWebForms" 
+    data-pd-webforms={formUrl}
+    id={randomId}
+  >
+  </div>
+</div>
+
+<script>
+  // Carga el script de Pipedrive
+  const script = document.createElement('script');
+  script.src = 'https://webforms.pipedrive.com/f/loader';
+  script.async = true;
+  document.body.appendChild(script);
+</script>

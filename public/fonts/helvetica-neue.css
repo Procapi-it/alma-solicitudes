@@ -1,0 +1,34 @@
+/* 
+ * Helvetica Neue Web Font
+ * Asegura que la tipografía se cargue correctamente en todos los dispositivos
+ */
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Helvetica Neue'),
+       local('HelveticaNeue'),
+       url('/fonts/helvetica-neue-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Helvetica Neue Medium'),
+       local('HelveticaNeue-Medium'),
+       url('/fonts/helvetica-neue-medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Helvetica Neue Bold'),
+       local('HelveticaNeue-Bold'),
+       url('/fonts/helvetica-neue-bold.woff2') format('woff2');
+}

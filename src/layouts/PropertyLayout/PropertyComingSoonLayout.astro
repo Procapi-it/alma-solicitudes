@@ -1,0 +1,174 @@
+---
+import Layout from '../Layout.astro';
+import SocialFooter from '../../components/SocialFooter.astro';
+import GcsImage from '../../components/GcsImage.astro';
+import PipedriveChat from '../../components/PipedriveChat.astro';
+
+export interface Props {
+  title: string;
+  subtitle?: string;
+  categoryId?: string;
+}
+
+const { title, subtitle, categoryId = 'casas-este' } = Astro.props;
+
+// Función para obtener la ruta en Google Cloud Storage para la imagen de fondo según la categoría
+function getBackgroundImage(categoryId: string): string {
+  switch(categoryId) {
+    case 'casas-este':
+      return 'Backgrounds/Proyectos_Este_-_Background_kpcnul.webp';
+    default:
+      return 'Backgrounds/Proyectos_Este_-_Background_kpcnul.webp';
+  }
+}
+
+// Obtener el ID de la categoría de la URL
+const pathParts = Astro.url.pathname.split('/');
+const urlCategoryId = pathParts[pathParts.length - 1];
+
+// Usar el categoryId de la URL o el valor predeterminado
+const backgroundImage = getBackgroundImage(categoryId || urlCategoryId);
+---
+
+<Layout title={`${title} | Haus Panama`}>
+  
+  <div class="font-helvetica fixed inset-0 w-full h-screen flex flex-col bg-[var(--background)] overflow-hidden" style="margin-top: -8px;">
+    <!-- Fondo de la página -->
+    <div class="absolute inset-0 z-0 bg-[var(--background)]"></div>
+    
+    <!-- Contenedor principal con altura completa -->
+    <div class="relative z-10 flex flex-col h-full py-0 max-w-[1920px] mx-auto w-full">
+      <!-- Contenido centrado para posicionamiento -->
+      <div class="flex-1 flex justify-center items-center p-2 sm:p-3 md:p-4">
+        
+        <!-- Tarjeta Coming Soon -->
+        <div class="coming-soon-card w-full max-w-5xl h-[65vh] sm:h-[70vh] lg:h-[75vh] lg:mt-20 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl border-2 border-[var(--primary)] overflow-hidden">
+          
+          <!-- Contenido de la tarjeta -->
+          <div class="flex flex-col md:flex-row h-full overflow-hidden">
+            
+            <!-- Imagen lateral solo en la parte izquierda -->
+            <div class="w-full md:w-1/2 h-40 sm:h-48 md:h-full relative overflow-hidden">
+              <GcsImage 
+                publicId="Backgrounds/Render_Provenza_vbnlqe.webp" 
+                alt="Provenza Coming Soon" 
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" 
+              />
+              <div class="absolute inset-0 bg-gradient-to-b from-black/70 to-black/30 flex flex-col items-center justify-center p-4 z-10">
+                <GcsImage 
+                  publicId="Logos/Logo_Provenza_fwpcoz.svg" 
+                  alt="Logo Provenza" 
+                  className="h-16 w-auto mb-2 z-20 bg-white/80 p-2 rounded-lg" 
+                />
+                <div class="bg-[var(--primary)] text-white text-xs font-bold tracking-wider py-1 px-3 rounded-full animate-pulse z-20">
+                  Proximamente
+                </div>
+              </div>
+            </div>
+            
+            <!-- Contenido de texto -->
+            <div class="w-full md:w-1/2 p-3 md:p-4 lg:p-5 flex flex-col justify-between overflow-y-auto">
+              <div>
+                <h2 class="text-xl md:text-2xl font-bold text-[var(--primary)] mb-2 text-center md:text-left">NUEVO MODELO</h2>
+                <h3 class="text-lg md:text-xl font-semibold text-gray-800 mb-3 text-center md:text-left">Provenza - Panamá Este</h3>
+                
+                <div class="h-1 w-1/2 bg-[var(--primary)] max-w-xs mx-auto md:mx-0 my-4"></div>
+                
+                <p class="text-gray-600 text-xs md:text-sm mb-3 text-center md:text-left">
+                  Muy pronto! nuestro nuevo modelo de casas en Panamá Este. Provenza combina diseño moderno 
+                  con comodidad en una ubicación privilegiada. Disfruta de amplios espacios con 200m² de terreno y 
+                  56.7m² de patio.
+                </p>
+                
+                <div class="flex flex-col space-y-2 text-sm text-gray-700 mb-4">
+                  <div class="flex items-center">
+                    <span class="font-semibold w-28">Habitaciones:</span>
+                    <span>3 espaciosas recámaras</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="font-semibold w-28">Baños:</span>
+                    <span>2.5 baños completos</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="font-semibold w-28">Ubicación:</span>
+                    <span>Panamá Este</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="flex flex-col space-y-4 mt-auto">
+                
+                <!-- Card de info -->
+                <div class="bg-gray-100 rounded-lg p-3 border border-[var(--primary)]/10 shadow-sm hover:shadow-md transition-shadow duration-300">
+                  <h4 class="text-xs font-medium text-[var(--primary)] mb-1 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Información importante
+                  </h4>
+                  <p class="text-xs text-gray-600">
+                    Próximamente dispondremos de una galería completa y recorrido virtual de este modelo.
+                    Contáctanos para obtener más información sobre este proyecto.
+                  </p>
+                </div>
+                
+                <!-- Botón para volver al inicio -->
+                <a 
+                  href="/" 
+                  class="text-center py-2 px-5 bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-full transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 text-sm"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  Volver al inicio
+                </a>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer Social -->
+      <div>
+        <SocialFooter />
+      </div>
+      
+      <!-- Pipedrive LeadBooster Chat -->
+      <div class="fixed bottom-1 right-1 z-50">
+        <PipedriveChat />
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Eliminar barra de scroll */
+  :global(body) {
+    overflow: hidden !important;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .coming-soon-card {
+    animation: fadeIn 0.8s ease-in-out;
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .coming-soon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

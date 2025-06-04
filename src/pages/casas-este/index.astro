@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import HeaderAstro from '../../components/HeaderAstro.astro';
+import PropertyComingSoonLayout from '../../layouts/PropertyLayout/PropertyComingSoonLayout.astro';
+
+// Título de la página
+const title = 'Casas Este | Haus Panama';
+const subtitle = 'Próximamente nuevos proyectos';
+---
+
+<Layout title={title}>
+  <HeaderAstro />
+  <main class="font-helvetica w-full min-h-screen -mt-[7px] relative overflow-hidden">
+    <!-- Contenedor principal con Coming Soon -->
+    <div class="w-full">
+      <PropertyComingSoonLayout title={title} subtitle={subtitle} categoryId="casas-este" />
+    </div>
+  </main>
+</Layout>

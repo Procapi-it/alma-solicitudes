@@ -1,0 +1,274 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeaderAstro from '../components/HeaderAstro.astro';
+import SocialFooter from '../components/SocialFooter.astro';
+import ChatWrapper from '../components/ChatWrapper.astro';
+import GcsImage from '../components/GcsImage.astro';
+
+// Definimos exactamente las 4 propiedades que necesitamos mostrar en base al diseño de Figma
+const mainCards = [
+  { 
+    id: 'oeste', 
+    title: 'casas en', 
+    title2: 'panamá oeste', 
+    subtitle: 'desde $80k', 
+    link: '/casas-y-aptos-oeste',
+    imagePath: 'Proyectos/Oeste/Siena/Fotos_siena-02.webp'
+  },
+  { 
+    id: 'brisas', 
+    title: 'apartamentos en', 
+    title2: 'brisas y tocumen', 
+    subtitle: 'desde $99k', 
+    link: '/brisas-y-tocumen',
+    imagePath: 'Proyectos/Este/Filia/Fotos_filia-18.webp'
+  },
+  { 
+    id: 'centro', 
+    title: 'apartamentos en el', 
+    title2: 'centro de la ciudad', 
+    subtitle: 'desde $129k', 
+    link: '/centro-ciudad',
+    imagePath: 'Proyectos/Centro/Athas/Fotos_Athas-06.webp'
+  },
+  { 
+    id: 'este', 
+    title: 'casas en', 
+    title2: 'panamá este', 
+    subtitle: 'desde $70k', 
+    link: '/casas-este',
+    imagePath: 'Proyectos/Este/Lagun/Fotos_lagun-08.webp'
+  }
+];
+---
+
+<Layout title="Haus Panama - Propiedades exclusivas en la ciudad de Panamá">
+  <HeaderAstro />
+  
+  <!-- Pipedrive LeadBooster Chat -->
+  <ChatWrapper />
+  
+  <main class="font-helvetica w-full h-[calc(100vh-60px)] flex flex-col overflow-hidden -mt-[8px]">
+    <!-- Fondo con overlay (COMENTADO TEMPORALMENTE) -->
+    <!-- 
+    <div class="absolute inset-0 z-0 top-0">
+      <GcsImage 
+        publicId="Backgrounds/Webpage_-_home-_background_uguldf.jpg" 
+        alt="" 
+        className="w-full h-full object-cover opacity-10" 
+      />
+    </div>
+    -->
+    <!-- Fondo blanco temporal -->
+    <div class="absolute inset-0 z-0 top-0 bg-white"></div>
+    
+    <div class="relative z-10 flex flex-col h-full max-w-[1920px] mx-auto w-full pt-1 pb-0"> <!-- Añadido padding superior e inferior -->
+      <!-- Logo y título centrados para pantallas grandes -->
+      <div class="hidden xl:flex flex-col items-center justify-center pt-4">
+        <GcsImage 
+          publicId="Logos/logohaus_usiwqr.svg" 
+          alt="Haus Panama Logo" 
+          className="h-16" 
+        />
+        <h1 class="text-[var(--secondary)] text-xl font-bold italic text-center">"así creamos bienestar"</h1>
+      </div>
+
+      <!-- Contenedor principal de cards -->
+      <div class="w-full flex-1 flex flex-col justify-evenly items-center px-3 sm:p-6 md:p-8 overflow-hidden">
+        <!-- Cards en formato vertical para mobile y horizontal para desktop -->
+        <div class="cards-container w-full max-w-5xl mx-auto flex flex-col space-y-2 md:flex md:flex-col md:space-y-2 md:items-center lg:flex lg:flex-row lg:space-y-0 lg:gap-4 lg:justify-center">
+          {mainCards.map((card) => (
+            <a 
+              href={card.link}
+              class="property-card interactive-element group block relative rounded-xl overflow-hidden border-2 border-[var(--primary)] transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] h-[60px] sm:h-[85px] md:h-auto lg:w-56 xl:w-64"
+              tabindex="0"
+              aria-label={`${card.title} ${card.title2} - ${card.subtitle} - Ver más detalles`}
+            >
+              <div class="card-image-container relative w-full aspect-[5/2] sm:aspect-[3/1] md:aspect-[1.8/1] lg:aspect-[3/4] xl:aspect-[2/3]">
+                <GcsImage 
+                  publicId={card.imagePath} 
+                  alt={`${card.title} ${card.title2}`} 
+                  className="w-full h-full object-cover opacity-80 transition-all duration-300 group-hover:opacity-100 active:opacity-100" 
+                />
+                
+                <!-- Overlay de información -->
+                <div class="card-overlay absolute inset-0 bg-black/70 group-hover:bg-transparent group-active:bg-transparent flex items-center justify-center md:items-end md:justify-start transition-all duration-300">
+                  <div class="card-content px-4 text-center md:text-left flex flex-col items-center md:items-start justify-center md:justify-end h-full w-full md:pb-4 md:pl-4">
+    
+                    <h3 class="text-[var(--primary)] group-hover:text-white group-active:text-white text-[10px] sm:text-xs md:text-lg lg:text-xl font-bold leading-tight mb-0.5 transition-colors duration-300 overlay-text">{card.title}</h3>
+                    <h3 class="text-[var(--primary)] group-hover:text-white group-active:text-white text-[10px] sm:text-xs md:text-lg lg:text-xl font-bold leading-tight mb-0.5 transition-colors duration-300 overlay-text">{card.title2}</h3>
+                    
+                    <p class="text-white text-[9px] sm:text-[10px] md:text-sm lg:text-base opacity-90 mb-0.5">{card.subtitle}</p>
+                  
+                    <div class="button-container mt-0.5 sm:mt-1 md:mt-3">
+                      <button 
+                        class="button inline-block py-0.5 px-2 sm:py-1 sm:px-3 md:py-1.5 md:px-5 border-2 border-white/80 text-white text-[8px] sm:text-[10px] md:text-sm lg:text-base font-medium rounded-md transition-all duration-300 group-hover:bg-[var(--primary)] group-hover:border-[var(--primary)] group-hover:border-2 group-active:bg-[var(--primary)] group-active:border-[var(--primary)] active:scale-95"
+                        aria-label="Ver más detalles de la propiedad"
+                      >
+                        Ver más
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Footer como parte del flujo normal -->
+      <div class="w-full mt-auto">
+        <SocialFooter />
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  :root {
+    --primary: #ff7518; /* Naranja */
+    --secondary: #333333; /* Gris oscuro */
+    --background: rgba(255, 255, 255, 0.75);
+  }
+  
+  /* Configuración para las tarjetas de propiedades con hover */
+  .property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+  }
+  
+  /* Optimización para versión móvil y tablet - asegura que no haya scroll vertical */
+  @media (max-width: 1023px) {
+    body {
+      overflow: hidden;
+    }
+    
+    main {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 120px);
+      overflow: hidden;
+    }
+    
+    .cards-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0px 12px;
+      gap: 9px;
+      overflow: hidden;
+    }
+    
+    .property-card {
+      height: 21% !important;
+      position: relative;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 2px solid var(--primary);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .property-card:last-child {
+      margin-bottom: 0;
+    }
+    
+    .card-image-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .card-content {
+      padding: 0 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+    
+    /* Estilos base para todas las pantallas */
+    .property-card h3 {
+      color: var(--primary);
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1.1;
+      margin: 0;
+      transition: color 0.3s ease;
+    }
+    
+    .property-card p {
+      color: white;
+      font-size: 12px;
+      opacity: 0.9;
+      margin: 2px 0;
+    }
+    
+    .button-container {
+      margin-top: 3px;
+    }
+    
+    /* Centrado solo para móvil */
+    @media (max-width: 767px) {
+      .property-card h3 {
+        text-align: center;
+      }
+      
+      .property-card p {
+        text-align: center;
+      }
+      
+      .button-container {
+        text-align: center;
+      }
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 2px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      color: white;
+      font-size: 10px;
+      font-weight: 500;
+      border-radius: 0.375rem;
+      transition: all 0.3s ease;
+    }
+    
+  /* Tailwind breakpoints: 
+     sm: 640px
+     md: 768px
+     lg: 1024px
+     xl: 1280px
+     2xl: 1536px
+  */
+  
+  /* Ajustes adicionales para desktop */
+  @media (min-width: 1280px) {
+    .property-card {
+      width: 280px;
+      flex-shrink: 0;
+    }
+  }
+</style>
+
+<script>
+  // Importar el servicio para manejar las interacciones de las tarjetas de propiedades
+  import { initPropertyCardInteractions } from '../services/interactions/propertyCardInteractions';
+  
+  // Inicializar las interacciones cuando el DOM esté cargado
+  document.addEventListener('DOMContentLoaded', initPropertyCardInteractions);
+</script>

@@ -1,0 +1,360 @@
+---
+import Layout from '../Layout.astro';
+import HeaderAstro from '../../components/HeaderAstro.astro';
+import SocialFooter from '../../components/SocialFooter.astro';
+import GcsImage from '../../components/GcsImage.astro';
+import ChatWrapper from '../../components/ChatWrapper.astro';
+import projectsData from '../../data/projects.json';
+
+// Función para determinar la ubicación del proyecto (Este, Oeste, Centro)
+function getProjectLocation(projectId: string): string {
+  // Mapa de ubicaciones por proyecto
+  const locationMap: Record<string, string> = {
+    // Proyectos del Este
+    'amitie': 'Este',
+    'filia': 'Este',
+    'lagun': 'Este',
+    
+    // Proyectos del Oeste
+    'verona': 'Oeste',
+    'siena': 'Oeste',
+    'piamonte': 'Oeste',
+    
+    // Proyectos del Centro
+    'athas': 'Centro',
+    'gaudi': 'Centro',
+    'alai': 'Centro'
+  };
+  
+  // Devolver la ubicación correspondiente o 'Centro' como valor predeterminado
+  return locationMap[projectId.toLowerCase()] || 'Centro';
+}
+
+export interface Props {
+  title: string;
+  subtitle?: string;
+  properties: {
+    id: string;
+    title: string;
+    title2?: string;
+    subtitle: string;
+    image: string;
+    link: string;
+  }[];
+}
+
+const { title, subtitle, properties } = Astro.props;
+
+// Función para obtener la ruta en Google Cloud Storage para la imagen de fondo según la categoría
+function getBackgroundImage(categoryId: string): string {
+  // Normalizar el categoryId para manejo más seguro
+  const normalizedId = categoryId.trim().toLowerCase();
+  
+  // Mapa de imágenes de fondo por categoría - más fácil de mantener que un switch
+  const backgroundMap: Record<string, string> = {
+    'brisas-y-tocumen': 'Proyectos_Este_-_Background_kpcnul.webp',
+    'este': 'Proyectos_Este_-_Background_kpcnul.webp',
+    'casas-este': 'Proyectos_Este_-_Background_kpcnul.webp',
+    'apartamentos-economicos': 'Proyectos_Este_-_Background_kpcnul.webp',
+    
+    'casas-y-aptos-oeste': 'Proyectos_Oeste_background_dtwlv1.webp',
+    'oeste': 'Proyectos_Oeste_background_dtwlv1.webp',
+    
+    'centro-ciudad': 'Proyectos_Centro_-_Background_ydtgyw.webp',
+    'centro': 'Proyectos_Centro_-_Background_ydtgyw.webp',
+    'apartamentos-premium': 'Proyectos_Centro_-_Background_ydtgyw.webp'
+  };
+  
+  // Buscar la imagen correspondiente o usar el valor predeterminado
+  return backgroundMap[normalizedId] || 'Proyectos_Centro_-_Background_ydtgyw.webp';
+}
+
+// Función para extraer el ID de categoría de la URL de manera más robusta
+function extractCategoryId(pathname: string): string {
+  // Eliminar barras al principio y final
+  const cleanPath = pathname.replace(/^\//, '').replace(/\/$/, '');
+  const pathParts = cleanPath.split('/');
+  
+  // Si la ruta tiene partes, devolver la última; de lo contrario, usar 'default'
+  if (pathParts.length > 0) {
+    const lastIndex = pathParts.length - 1;
+    return pathParts[lastIndex];
+  }
+  return 'default';
+}
+
+// Obtener el ID de la categoría de la URL
+const categoryId = extractCategoryId(Astro.url.pathname);
+
+// Objeto JSON con los títulos para cada categoría
+const categoryTitles: Record<string, {line1: string, line2: string, line3: string}> = {
+  'brisas-y-tocumen': {
+    line1: 'vive cerca del',
+    line2: 'aeropuerto de',
+    line3: 'tocumen'
+  },
+  'casas-y-aptos-oeste': {
+    line1: 'vive en el campo',
+    line2: 'con los beneficios',
+    line3: 'de la ciudad'
+  },
+  'centro-ciudad': {
+    line1: 'vive en el corazón',
+    line2: 'de la ciudad de',
+    line3: 'panamá'
+  },
+  'casas-este': {
+    line1: 'vive en el',
+    line2: 'nuevo polo de',
+    line3: 'desarrollo'
+  },
+  'apartamentos-economicos': {
+    line1: 'tu apartamento',
+    line2: 'soñado al mejor',
+    line3: 'precio'
+  },
+  'apartamentos-premium': {
+    line1: 'lujo y exclusividad',
+    line2: 'en el centro de',
+    line3: 'panamá'
+  },
+  'default': {
+    line1: 'encuentra tu',
+    line2: 'hogar ideal en',
+    line3: 'panamá'
+  }
+};
+
+// Obtener el título basado en la categoría
+const categoryTitle = categoryTitles[categoryId] || categoryTitles['default'];
+
+// Obtener la imagen de fondo basada en la categoría
+const backgroundImage = getBackgroundImage(categoryId);
+
+// Función para mapear la ruta de la imagen a la ruta del proyecto
+function getProjectRoute(imagePath: string): string {
+  // Extraer el nombre del archivo de la URL de Google Cloud Storage
+  const logoFileName = imagePath.split('/').pop() || '';
+  
+  // Simplificar la detección del proyecto buscando nombres clave en la URL completa
+  if (imagePath.includes('Athas')) {
+    return '/athas';
+  } else if (imagePath.includes('Gaudi')) {
+    return '/gaudi';
+  } else if (imagePath.includes('Alai')) {
+    return '/alai';
+  } else if (imagePath.includes('Filia')) {
+    return '/filia';
+  } else if (imagePath.includes('Amitie')) {
+    return '/amitie';
+  } else if (imagePath.includes('Lagun')) {
+    return '/lagun';
+  } else if (imagePath.includes('Verona')) {
+    return '/verona';
+  } else if (imagePath.includes('Siena')) {
+    return '/siena';
+  } else if (imagePath.includes('Piamonte')) {
+    return '/piamonte';
+  }
+  
+  // Si no encuentra coincidencia, devuelve la ruta original
+  return imagePath.includes('Logo_') ? `/${logoFileName.replace('Logo_', '').replace('.svg', '').toLowerCase()}` : '/property-details';
+}
+
+---
+
+<Layout title={`${title} | Haus Panama`}>
+  <HeaderAstro />
+  
+  <!-- Pipedrive LeadBooster Chat -->
+  <ChatWrapper />
+  
+  <main class="font-helvetica relative w-full h-[calc(100vh-60px)] flex flex-col overflow-hidden bg-[var(--background)]">
+    <div class="relative z-10 flex flex-col h-[calc(100vh-60px)] max-w-[1920px] mx-auto w-full justify-between">
+      <!-- Hero section con fondo de imagen -->
+      <div class="w-full relative overflow-hidden h-[22vh] md:h-[28vh] lg:h-[38vh] flex flex-col">
+        <!-- Imagen de fondo con máscara de gradiente -->
+        <div class="absolute inset-0 z-0">
+          <div class="w-full h-full mask-linear-gradient-to-b">
+            <GcsImage 
+              publicId={`Backgrounds/${backgroundImage}`} 
+              alt={title} 
+              className="w-full h-full object-cover" 
+            />
+          </div>
+        </div>
+        
+        <!-- Contenido del hero -->
+        <div class="relative z-10 flex flex-col items-center justify-end h-full pb-6 text-center w-full">
+          <!-- <h1 class="text-[var(--secondary)] text-3xl sm:text-4xl md:text-5xl font-bold max-w-lg px-4">
+            {categoryTitle.line1}<br />{categoryTitle.line2}<br />{categoryTitle.line3}
+          </h1> -->
+          <!-- <div class="w-16 sm:w-20 md:w-24 h-[1px] bg-[var(--secondary)] mt-3"></div> -->
+        </div>
+      </div>
+      
+      <!-- Lista de proyectos - Mobile first con row para desktop -->
+      <div class="container mx-auto px-4 sm:px-6 overflow-hidden flex-1 flex flex-col">
+        <div class="projects-grid w-full max-w-5xl mx-auto lg:flex lg:flex-row lg:flex-nowrap lg:justify-center flex-1 flex-col justify-center">
+          {properties.map((property) => {
+            // Obtener la ruta correcta del proyecto basada en el logo
+            const projectRoute = getProjectRoute(property.image);
+            
+            // Extraer el ID del proyecto de la ruta (sin el slash inicial)
+            const projectId = projectRoute.replace('/', '');
+            
+            // Obtener los datos del proyecto desde projects.json si existen
+            const projectInfo = projectsData[projectId as keyof typeof projectsData];
+            
+            return (
+              <a 
+                href={projectRoute}
+                class="project-card group relative rounded-xl overflow-hidden flex flex-col items-center px-3 py-1 md:px-4 md:py-2 lg:px-1 lg:py-1 shadow-lg transition-all duration-300 hover:shadow-xl w-full mb-1.5 md:mb-2 lg:mb-0 lg:flex-shrink-0 border-2 border-[var(--secondary)]/80 md:border-2 md:border-[var(--secondary)]/80 pt-2 lg:pt-4"
+                tabindex="0">
+                {/* Fondo con imagen de Google Cloud Storage según el proyecto */}
+                <div class="absolute inset-0 z-0 opacity-10">
+                  <img 
+                    src={projectInfo && projectInfo.coverImage ? `https://storage.googleapis.com/hauspanama/Proyectos/${getProjectLocation(projectInfo.id)}/${projectInfo.id.charAt(0).toUpperCase() + projectInfo.id.slice(1)}/${projectInfo.coverImage}` : `https://storage.googleapis.com/hauspanama/Proyectos/Centro/Background.webp`} 
+                    alt="" 
+                    class="w-full h-full object-cover" 
+                    loading="lazy"
+                  />
+                </div>
+                
+                {/* Contenido del proyecto - contenedor fijo para logos estandarizados */}
+                <div class="w-full h-[70px] flex items-center justify-center relative z-10 mt-2">
+                  <div class="w-[140px] h-[60px] flex items-center justify-center overflow-hidden">
+                    <img 
+                      src={projectInfo && projectInfo.logo ? `https://storage.googleapis.com/hauspanama/Portadas/${projectInfo.logo}` : `https://storage.googleapis.com/hauspanama/Portadas/${property.image}`} 
+                      alt={property.title} 
+                      class="w-auto h-auto max-w-[130px] max-h-[50px] object-contain transition-all duration-300 group-hover:scale-105" 
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                <div class="w-full h-full flex-1 relative z-10 bg-transparent rounded-md py-1 px-1 flex flex-col justify-center items-center">
+                  {/* Información compacta de ubicación y precios */}
+                  <div class="text-center text-gray-600 mx-auto w-full space-y-0 flex flex-col items-center">
+                    {projectInfo ? (
+                      <>
+                        <p class="text-sm sm:text-2xl font-bold leading-tight">{projectInfo.address}</p>
+                        <p class="text-sm sm:text-2xl leading-tight"><span class="font-semibold">Precio:</span> {projectInfo.price}</p>
+                      </>
+                    ) : (
+                      <p class="text-sm sm:text-2xl leading-tight"><span class="font-semibold">Precios:</span> {property.subtitle}</p>
+                    )}
+                  </div>
+                  {/* Botón ver proyecto - más cercano al contenido anterior */}
+                  <div class="transition-colors duration-300 w-full flex justify-center mt-0">
+                    <span class="text-[var(--primary)] text-sm md:text-lg font-bold tracking-wide px-3 py-0.5 md:px-3 md:py-0.5 rounded-md">ver proyecto</span>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="w-full mt-auto z-20 lg:relative self-end">
+        <SocialFooter />
+      </div>
+    </div>
+  </main>
+  
+  <style>
+    /* Estilos para la máscara de gradiente - color completo arriba, degradado solo abajo */
+    .mask-linear-gradient-to-b {
+      mask-image: linear-gradient(to bottom, 
+                               rgba(0, 0, 0, 1) 0%, 
+                               rgba(0, 0, 0, 1) 50%, 
+                               rgba(0, 0, 0, 0.7) 70%,  
+                               rgba(0, 0, 0, 0.3) 85%, 
+                               transparent 100%); 
+    }
+    
+    /* Estilo para el texto de ver proyecto con stroke */
+    .project-cta {
+      -webkit-text-stroke: 0.5px var(--primary);
+      text-stroke: 0.5px var(--primary);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      position: relative;
+      text-shadow: 0px 1px 1px rgba(238, 122, 35, 0.2);
+    }
+    
+    /* Configuración de los proyectos - Mobile first */
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 80%;
+      overflow: hidden;
+    }
+    
+    .project-card {
+      max-width: 100%;
+      width: 100%;
+      height: 29%;
+      box-sizing: border-box;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    @media (min-width: 1024px) {
+      .project-card {
+        /* Añadir margen para evitar recorte */
+        margin: 6px 0;
+      }
+      
+      /* La transformación ahora está controlada por la clase card-3d-shadow-hover */
+    }
+    
+    /* Breakpoints de Tailwind */
+    @media (min-width: 768px) {
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      
+      .project-card {
+        min-height: 110px;
+      }
+    }
+    
+    /* En desktop: fila horizontal */
+    @media (min-width: 1024px) {
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 18px;
+        padding: 16px;
+        max-width: 1310px;
+        margin: 0 auto;
+      }
+      
+      .project-card {
+        height: 220px;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        min-width: 320px;
+      }
+      
+      .project-card > div:first-child {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .project-card > div:last-child {
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+  </style>
+</Layout>
