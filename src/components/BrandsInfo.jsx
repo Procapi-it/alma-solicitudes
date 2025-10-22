@@ -77,27 +77,6 @@ export const BrandsInfo = ({ register, setValue }) => {
         </select>
       </div>
 
-      <div className="mb-4 mx-auto">
-        <label htmlFor="meses" className="block mb-2">
-          Cuánto tiempo planea utilizar el local?
-          <span className="text-red-500">*</span>:
-        </label>
-        <select
-          id="meses"
-          {...register("meses", { required: true })}
-          className="border border-gray-300 px-4 py-2 rounded-md w-full"
-        >
-          <option value="">Seleccione:</option>
-          {[...Array(12)].map((_, i) => (
-            <option key={i + 1} value={i + 1}>
-              {i + 1}
-            </option>
-          ))}
-        </select>
-        <label htmlFor="textomeses" className="text-sm text-gray-600">
-          Meses
-        </label>
-      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         <div className="mb-4">
           <label htmlFor="razonprincipal" className="block mb-2">

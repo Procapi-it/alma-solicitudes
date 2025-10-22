@@ -8,7 +8,6 @@ export const sendCustomEmail = (data, judicial)  => {
             import.meta.env.VITE_EMAIL_TEMPLATE_ID,
             {
                 sucursales: data.sucursales,
-                meses: data.meses,
                 razonprincipal: data.razonprincipal,
                 tiempodesocupar: data.tiempodesocupar,
                 persona: data.persona,
