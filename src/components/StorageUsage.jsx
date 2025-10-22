@@ -1,138 +1,122 @@
 
 export const StorageUsage = ({ register }) => {
-    const handleCheckboxChange = event => {
-        const selectedCheckbox = event.target.value;
-        register("queGuardar", { value: selectedCheckbox });
-    };
-
     return (
         <section>
-            <h2 className="text-bold">USARÉ EL DEPÓSITO PARA GUARDAR *</h2>
+            {/* Pregunta 1: Tipo de uso */}
+            <div className="mb-6">
+                <h2 className="font-bold mb-3">
+                    1. ¿Para qué tipo de uso requiere el depósito?
+                    <span className="text-red-500">*</span>
+                </h2>
+                <div className="flex flex-col gap-2 ml-4">
+                    <div>
+                        <input
+                            type="radio"
+                            id="tipoUsoResidencial"
+                            value="Residencial (bienes personales/familiares)"
+                            {...register("tipoUso", { required: true })}
+                        />
+                        <label htmlFor="tipoUsoResidencial" className="mx-2">
+                            Residencial (bienes personales/familiares)
+                        </label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="tipoUsoComercial"
+                            value="Comercial (bienes de negocio)"
+                            {...register("tipoUso", { required: true })}
+                        />
+                        <label htmlFor="tipoUsoComercial" className="mx-2">
+                            Comercial (bienes de negocio)
+                        </label>
+                    </div>
+                </div>
+            </div>
 
-            <div className="grid xl:grid-rows-4 xl:grid-flow-col px-12 md:grid-row-1 gap-1 place-content-evenly mt-5">
-                <div>
-                    <input
-                        onChange={handleCheckboxChange}
-                        type="checkbox"
-                        id="checkbox1"
-                        {...register("checkbox1")}
-                    />
-                    <label htmlFor="checkbox1" className="mx-1">
-                        Herramientas
-                    </label>
+            {/* Pregunta 2: Tipo de bienes */}
+            <div className="mb-6">
+                <h2 className="font-bold mb-3">
+                    2. ¿Qué tipo de bienes almacenará principalmente?
+                    <span className="text-red-500">*</span>
+                </h2>
+                <div className="flex flex-col gap-2 ml-4">
+                    <div>
+                        <input
+                            type="radio"
+                            id="tipoBienesMuebles"
+                            value="Muebles y enseres"
+                            {...register("tipoBienes", { required: true })}
+                        />
+                        <label htmlFor="tipoBienesMuebles" className="mx-2">
+                            Muebles y enseres
+                        </label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="tipoBienesDocumentos"
+                            value="Documentos/archivos"
+                            {...register("tipoBienes", { required: true })}
+                        />
+                        <label htmlFor="tipoBienesDocumentos" className="mx-2">
+                            Documentos/archivos
+                        </label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="tipoBienesMercancia"
+                            value="Mercancía/productos"
+                            {...register("tipoBienes", { required: true })}
+                        />
+                        <label htmlFor="tipoBienesMercancia" className="mx-2">
+                            Mercancía/productos
+                        </label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="tipoBienesEquipo"
+                            value="Equipo y tecnología"
+                            {...register("tipoBienes", { required: true })}
+                        />
+                        <label htmlFor="tipoBienesEquipo" className="mx-2">
+                            Equipo y tecnología
+                        </label>
+                    </div>
                 </div>
-                <div>
-                    <input
-                        onChange={handleCheckboxChange}
-                        type="checkbox"
-                        id="checkbox2"
-                        {...register("checkbox2")}
-                    />
-                    <label htmlFor="checkbox2" className="mx-1">
-                        Desalojo
-                    </label>
-                </div>
-                <div>
-                    <input
-                        onChange={handleCheckboxChange}
-                        type="checkbox"
-                        id="checkbox3"
-                        {...register("checkbox3")}
-                    />
-                    <label htmlFor="checkbox3" className="mx-1">
-                        Materiales
-                    </label>
-                </div>
-                <div>
-                    <input
-                        onChange={handleCheckboxChange}
-                        type="checkbox"
-                        id="checkbox4"
-                        {...register("checkbox4")}
-                    />
-                    <label htmlFor="checkbox4" className="mx-1">
-                        Carros
-                    </label>
-                </div>
-                <div>
-                    <input
-                        onChange={handleCheckboxChange}
-                        type="checkbox"
-                        id="checkbox5"
-                        {...register("checkbox5")}
-                    />
-                    <label htmlFor="checkbox5" className="mx-1">
-                        Documentos / Archivos
-                    </label>
-                </div>
-                <div>
-                    <input
-                        onChange={handleCheckboxChange}
-                        type="checkbox"
-                        id="checkbox6"
-                        {...register("checkbox6")}
-                    />
-                    <label htmlFor="checkbox6" className="mx-1">
-                        Mobiliario y Equipos
-                    </label>
-                </div>
-                <div>
-                    <input
-                        onChange={handleCheckboxChange}
-                        type="checkbox"
-                        id="checkbox7"
-                        {...register("checkbox7")}
-                    />
-                    <label htmlFor="checkbox7" className="mx-1">
-                        Artículos de Hogar
-                    </label>
-                </div>
-                <div>
-                    <input
-                        onChange={handleCheckboxChange}
-                        type="checkbox"
-                        id="checkbox8"
-                        {...register("checkbox8")}
-                    />
-                    <label htmlFor="checkbox8" className="mx-1">
-                        Repuestos
-                    </label>
-                </div>
-                <div>
-                    <input
-                        onChange={handleCheckboxChange}
-                        type="checkbox"
-                        id="checkbox9"
-                        {...register("checkbox9")}
-                    />
-                    <label htmlFor="checkbox9" className="mx-1">
-                        Mercancía
-                    </label>
-                </div>
-                <div>
-                    <input
-                        onChange={handleCheckboxChange}
-                        type="checkbox"
-                        id="checkbox10"
-                        {...register("checkbox10")}
-                    />
-                    <label
-                        onChange={handleCheckboxChange}
-                        htmlFor="checkbox10"
-                        className="mx-1">
-                        Muebles del Hogar
-                    </label>
-                </div>
-                <div>
-                    <input
-                        onChange={handleCheckboxChange}
-                        type="checkbox"
-                        id="checkbox11"
-                        {...register("checkbox11")}
-                    />
-                    <label htmlFor="checkbox11" className="mx-1">
-                        Otros
-                    </label>
+            </div>
+
+            {/* Pregunta 3: Procedencia de bienes */}
+            <div className="mb-6">
+                <h2 className="font-bold mb-3">
+                    3. ¿Dónde estaban estos bienes antes de traerlos al depósito?
+                    <span className="text-red-500">*</span>
+                </h2>
+                <div className="flex flex-col gap-2 ml-4">
+                    <div>
+                        <input
+                            type="radio"
+                            id="procedenciaPropio"
+                            value="Espacio propio o alquilado de uso diario (residencia, oficina, local)"
+                            {...register("procedenciaBienes", { required: true })}
+                        />
+                        <label htmlFor="procedenciaPropio" className="mx-2">
+                            Espacio propio o alquilado de uso diario (residencia, oficina, local)
+                        </label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="procedenciaTercero"
+                            value="Espacio de un tercero (proveedor, bodega externa, país de origen)"
+                            {...register("procedenciaBienes", { required: true })}
+                        />
+                        <label htmlFor="procedenciaTercero" className="mx-2">
+                            Espacio de un tercero (proveedor, bodega externa, país de origen)
+                        </label>
+                    </div>
                 </div>
             </div>
         </section>
