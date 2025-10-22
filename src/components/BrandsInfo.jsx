@@ -100,32 +100,37 @@ export const BrandsInfo = ({ register, setValue }) => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
         <div className="mb-4">
-          <label htmlFor="fechaocupacion" className="block mb-2">
-            Que fecha planea ocupar el local?
+          <label htmlFor="razonprincipal" className="block mb-2">
+            ¿Cuál es la razón principal por la que necesita el depósito?
             <span className="text-red-500">*</span>:
           </label>
-          <input
-            type="date"
-            id="fechaocupacion"
-            {...register("fechaocupacion")}
+          <select
+            id="razonprincipal"
+            {...register("razonprincipal", { required: true })}
             className="border border-gray-300 px-4 py-2 rounded-md w-full"
-          />
+          >
+            <option value="">Seleccione:</option>
+            <option value="Liberar espacio en vivienda/negocio">Liberar espacio en vivienda/negocio</option>
+            <option value="Esperar de inmueble (por remodelación, propio o rentado)">Esperar de inmueble (por remodelación, propio o rentado)</option>
+            <option value="Guardar temporalmente hasta vender/regalar/descartar">Guardar temporalmente hasta vender/regalar/descartar</option>
+            <option value="Guardar de forma permanente/indefinida en lugar seguro">Guardar de forma permanente/indefinida en lugar seguro</option>
+          </select>
         </div>
 
         <div className="mb-4">
-          <label htmlFor="motivo" className="block mb-2">
-            Motivo de uso del local?
+          <label htmlFor="tiempodesocupar" className="block mb-2">
+            ¿Cuándo planea desocupar la bodega?
             <span className="text-red-500">*</span>:
           </label>
-          <select id="motivo" {...register("motivo")} className="border border-gray-300 px-4 py-2 rounded-md w-full">
+          <select
+            id="tiempodesocupar"
+            {...register("tiempodesocupar", { required: true })}
+            className="border border-gray-300 px-4 py-2 rounded-md w-full"
+          >
             <option value="">Seleccione:</option>
-            <option value="Viaje">Viaje</option>
-            <option value="Reducción de gastos">Reducción de Gastos</option>
-            <option value="Alquilo su vivienda">Alquilo su vivienda</option>
-            <option value="mLibera espacio de vivienda actual">Libera espacio en vivienda actual</option>
-            <option value="Falta de espacio en negocio">Falta de espacio en negocio</option>
-            <option value="mEspera entrega de casa">Espera entrega de casa</option>
-            <option value="No tiene espacio propio">No tiene espacio propio</option>
+            <option value="Entre 1 y 6 meses">Entre 1 y 6 meses</option>
+            <option value="Entre 7 y 12 meses">Entre 7 y 12 meses</option>
+            <option value="En más de 12 meses">En más de 12 meses</option>
           </select>
         </div>
       </div>
