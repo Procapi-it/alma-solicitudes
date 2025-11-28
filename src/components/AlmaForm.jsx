@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { sendCustomEmail } from "../global/email"
+import { sendToCRMTracker } from "../global/api"
 import { Completed } from "./completed"
 import { BrandsInfo } from "./BrandsInfo"
 import { PersonalInfo } from "./PersonalInfo"
@@ -20,8 +21,13 @@ export const AlmaForm = () => {
   const [judicial, setJudicial] = useState("no")
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    // Enviar email con EmailJS
     sendCustomEmail(data, judicial)
+    
+    // Enviar datos al CRM Tracker (en paralelo, no bloquea)
+    sendToCRMTracker(data)
+    
     setIsSubmitted(true)
   }
 
