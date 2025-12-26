@@ -28,7 +28,7 @@ export const StorageUsage = ({ register }) => {
                             {...register("tipoUso", { required: true })}
                         />
                         <label htmlFor="tipoUsoComercial" className="mx-2">
-                            Comercial (bienes de negocio)
+                            Comercial (Bienes de negocio o empresa)
                         </label>
                     </div>
                 </div>
@@ -114,7 +114,7 @@ export const StorageUsage = ({ register }) => {
                             {...register("procedenciaBienes", { required: true })}
                         />
                         <label htmlFor="procedenciaPropio" className="mx-2">
-                            Espacio propio o alquilado de uso diario (residencia, oficina, local)
+                            Espacio propio o alquilado de uso diario (Residencia, oficina o local comercial)
                         </label>
                     </div>
                     <div>
@@ -125,7 +125,7 @@ export const StorageUsage = ({ register }) => {
                             {...register("procedenciaBienes", { required: true })}
                         />
                         <label htmlFor="procedenciaTercero" className="mx-2">
-                            Espacio de un tercero (proveedor, bodega externa, país de origen)
+                            Espacio de un tercero (Bodega externa, país de origen)
                         </label>
                     </div>
                 </div>

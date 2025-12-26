@@ -89,15 +89,15 @@ export const BrandsInfo = ({ register, setValue }) => {
             className="border border-gray-300 px-4 py-2 rounded-md w-full"
           >
             <option value="">Seleccione:</option>
-            <option value="Guardar temporalmente (Por remodelación del inmueble o en espera de entrega)">Guardar temporalmente (Por remodelación del inmueble o en espera de entrega)</option>
-            <option value="Guardar temporalmente hasta vender/regalar/descartar">Guardar temporalmente hasta vender/regalar/descartar</option>
-            <option value="Guardar permanentemente">Guardar permanentemente</option>
+            <option value="Guardar temporalmente (Por remodelación del inmueble o en espera de entrega de inmueble)">Guardar temporalmente (Por remodelación del inmueble o en espera de entrega de inmueble)</option>
+            <option value="Guardar temporalmente hasta vender, regalar o eliminar">Guardar temporalmente hasta vender, regalar o eliminar</option>
+            <option value="Guardar por tiempo indefinido">Guardar por tiempo indefinido</option>
           </select>
         </div>
 
         <div className="mb-4">
           <label htmlFor="tiempodesocupar" className="block mb-2">
-            ¿Cuándo planea desocupar la bodega?
+            ¿Cuánto tiempo planea ocupar la bodega?
             <span className="text-red-500">*</span>:
           </label>
           <select
