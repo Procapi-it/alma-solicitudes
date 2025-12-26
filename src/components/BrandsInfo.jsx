@@ -89,10 +89,9 @@ export const BrandsInfo = ({ register, setValue }) => {
             className="border border-gray-300 px-4 py-2 rounded-md w-full"
           >
             <option value="">Seleccione:</option>
-            <option value="Liberar espacio en vivienda/negocio">Liberar espacio en vivienda/negocio</option>
-            <option value="Esperar de inmueble (por remodelación, propio o rentado)">Esperar de inmueble (por remodelación, propio o rentado)</option>
+            <option value="Guardar temporalmente (Por remodelación del inmueble o en espera de entrega)">Guardar temporalmente (Por remodelación del inmueble o en espera de entrega)</option>
             <option value="Guardar temporalmente hasta vender/regalar/descartar">Guardar temporalmente hasta vender/regalar/descartar</option>
-            <option value="Guardar de forma permanente/indefinida en lugar seguro">Guardar de forma permanente/indefinida en lugar seguro</option>
+            <option value="Guardar permanentemente">Guardar permanentemente</option>
           </select>
         </div>
 

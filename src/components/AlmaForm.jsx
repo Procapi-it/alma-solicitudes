@@ -42,15 +42,17 @@ export const AlmaForm = () => {
 
             <BrandsInfo register={register} errors={errors} setValue={setValue} />
 
+            <hr className="my-5" />
+
+            <StorageUsage register={register} />
+
+            <hr className="my-5" />
+
             <PersonalInfo register={register} errors={errors} persona={persona} setPersona={setPersona} />
 
             <hr className="my-5" />
 
             <AuthorizedPersons register={register} errors={errors} />
-
-            <hr className="my-5" />
-
-            <StorageUsage register={register} />
 
             <hr className="my-5" />
 

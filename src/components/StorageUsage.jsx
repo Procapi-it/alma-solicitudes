@@ -45,11 +45,22 @@ export const StorageUsage = ({ register }) => {
                         <input
                             type="radio"
                             id="tipoBienesMuebles"
-                            value="Muebles y enseres"
+                            value="Muebles o mobiliario"
                             {...register("tipoBienes", { required: true })}
                         />
                         <label htmlFor="tipoBienesMuebles" className="mx-2">
-                            Muebles y enseres
+                            Muebles o mobiliario
+                        </label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="tipoBienesEnseres"
+                            value="Enseres del hogar"
+                            {...register("tipoBienes", { required: true })}
+                        />
+                        <label htmlFor="tipoBienesEnseres" className="mx-2">
+                            Enseres del hogar
                         </label>
                     </div>
                     <div>
@@ -78,11 +89,11 @@ export const StorageUsage = ({ register }) => {
                         <input
                             type="radio"
                             id="tipoBienesEquipo"
-                            value="Equipo y tecnología"
+                            value="Equipos, herramientas o equipo de tecnología"
                             {...register("tipoBienes", { required: true })}
                         />
                         <label htmlFor="tipoBienesEquipo" className="mx-2">
-                            Equipo y tecnología
+                            Equipos, herramientas o equipo de tecnología
                         </label>
                     </div>
                 </div>
