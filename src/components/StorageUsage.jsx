@@ -17,7 +17,7 @@ export const StorageUsage = ({ register }) => {
                             {...register("tipoUso", { required: true })}
                         />
                         <label htmlFor="tipoUsoResidencial" className="mx-2">
-                            Residencial (bienes personales/familiares)
+                            Residencial (Bienes personales/familiares)
                         </label>
                     </div>
                     <div>
